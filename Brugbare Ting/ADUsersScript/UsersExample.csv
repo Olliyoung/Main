@@ -1,0 +1,6 @@
+Username;Firstname;Lastname;Initials;Email;JobRole;Privileges
+jdoe;John;Doe;JD;jdoe@data.local;IT;admin
+asmith;Alice;Smith;AS;asmith@data.local;HR;user
+bjones;Bob;Jones;BJ;bjones@data.local;Marketing;user
+msanders;Mary;Sanders;MS;msanders@data.local;IT;admin
+klee;Kevin;Lee;KL;klee@data.local;Sales;user

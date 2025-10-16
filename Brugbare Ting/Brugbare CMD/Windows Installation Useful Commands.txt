@@ -1,0 +1,7 @@
+TRYK SHIFT + F10 FOR AT ÅBNE CMD
+
+Hvis du ikke kan komme forbi der hvor du skal tilføje en microsoft konto så kan du:
+"start mx-cxh:localonly"
+
+Hvis du ikke kan komme forbi der hvor man skal tilføje et internet kan du skrive:
+oobe/bypassnro
