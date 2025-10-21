@@ -1,0 +1,153 @@
+RAID 0 
+2 Diske
+Navn: striping
+Størelse: 20 GB
+Read 3569.57 Write 2184.35
+
+RAID 5
+4 Diske
+Navn: RAID 5
+Størrelse: 40GB
+Read 3121.75 Write 512.14
+
+RAID 1
+2 Diske
+Navn: Mirrored volume 
+Størrelse: 10 GB
+Read: 3587 Write:274.32
+
+JBOD
+2 Diske
+Navn: spanned volume 
+Størelse 10 GB
+Read 3574.09 Write 2244.63
+
+JBOD
+3 Diske 
+Navn: spanned Volume 
+Størrelse: 29 GB
+Read: 3572.82 Write: 2240
+
+JBOT
+4 Diske 
+Navn: spanned Volume
+Størrelse: 40 GB
+Read: 2128.87 Write 520
+
+RAID 0
+3 Diske 
+Navn: Striping 
+Størrelse: 29 GB
+Write 3560.81 Write 2187.86
+
+RAID 0
+4 Diske 
+Navn Striping 
+Størrelse: 40 GB
+Read 3550.35 Write 
+
+RAID 5 
+3 Diske
+Navn: RAID 5
+Størrelse: 20 GB
+Read 2450.16 Write 218.74
+
+FYSISK
+
+Oliver, Nikolaj, Alexander, Viktor, Erik, Kristian
+
+RAID 0
+Størrelse 931 GB
+2 diske 
+Read 277 Write 273
+
+RAID 0
+Størrelse 1390 GB
+3 diske 
+read 411 write 405
+
+RAID 0
+Størrelse 1862 GB
+4 diske 
+Read 549 Write 521
+
+RAID 0
+Størrelse 2328 GB
+5 diske 
+Read 881 write 663
+
+RAID 0
+Størrelse 2800 GB 
+6 Diske
+Read 662 Write 616
+
+RAID 0
+Størrelse 3250 GB
+7 Diske
+Read 943 Write 912
+
+RAID 0 
+Størrelse 1862
+8 Diske 
+Read 877 write 853
+
+RAID 1
+Størrelse 465
+2 Diske
+Read 301 Write 133
+
+RAID 5
+Størrelse 931 GB
+3 Diske
+Read 273 Write 274
+
+RAID 5
+Størrelse 1397 GB
+4 Diske
+Read 406 Write 412
+
+RAID 5
+Størrelse 1862 GB
+5 Diske
+Read 545 Write 526
+
+RAID 5
+Størrelse 2328 GB
+6 Diske 
+Read 682 Write 671
+
+RAID 5
+Størrelse 2800 GB
+7 Diske
+Read 819 Write 800
+
+RAID 5
+Størrelse 1630 GB
+8 Diske
+Read 765 Write 752
+
+RAID 10
+Størrelse 931 GB
+4 Diske
+Read 537 Write 269
+
+RAID 10
+Størrelse 1400 GB
+6 Diske
+Read 702 Write 402
+
+RAID 10
+Størrelse: 931
+8 Disks    
+Read 824 Write 433
+
+RAID 50
+Størrelse:1862 GB
+6 Diske
+Read 544 Write 302
+
+
+
+
+
+
