@@ -15,27 +15,39 @@ function Vis-Menu()
         # Renser skærmen før menuen skrives ud. 
         # Bemærk, at resutatet af sidste menuvalg dermed fjernes fra skærmen.
         Write-Host "
-            #----------------------------------------------------------# 
-            #                 Enkle cmdlet opgaver                     #
-            #                                                          #
-            #                                                          #
-            #   1. Serienummeret på disken på maskinen                 #
-            #   2. De ti største/længste filer på maskinen             #
-            #   3. Find de ti ældste dll filer på maskinen             #
-            #                                                          #
-            #   4. HotFix’es på maskinen sorteret efter Description    #
-            #   5. Ledig fysisk hukommelse                             #
-            #   6. Ledig virtuel hukommelse                            #
-            #                                                          #
-            #   7. PowerShell versionen                                #
-            #                                                          #
-            #   0. Slut                                                #
-            #                                                          #
-            #   67. ???                                                #
-            #----------------------------------------------------------#
-            "
+            #---------------------------------------------------------------------------#                    
+            #                                                                           #
+            #                                                                           #
+            #          ▒█████   ██▓     ██▓ ██▒   █▓▓█████  ██▀███      ██▓             #
+            #         ▒██▒  ██▒▓██▒    ▓██▒▓██░   █▒▓█   ▀ ▓██ ▒ ██▒   ▓██▒             #
+            #         ▒██░  ██▒▒██░    ▒██▒ ▓██  █▒░▒███   ▓██ ░▄█ ▒   ▒██░             #
+            #         ▒██   ██░▒██░    ░██░  ▒██ █░░▒▓█  ▄ ▒██▀▀█▄     ▒██░             #
+            #         ░ ████▓▒░░██████▒░██░   ▒▀█░  ░▒████▒░██▓ ▒██▒   ░██████▒         #
+            #         ░ ▒░▒░▒░ ░ ▒░▓  ░░▓     ░ ▐░  ░░ ▒░ ░░ ▒▓ ░▒▓░   ░ ▒░▓  ░         #
+            #         ░ ▒ ▒░ ░ ░ ▒  ░ ▒ ░   ░ ░░   ░ ░  ░  ░▒ ░ ▒░   ░ ░ ▒  ░           #
+            #         ░ ░ ░ ▒    ░ ░    ▒ ░     ░░     ░     ░░   ░      ░ ░            #
+            #             ░ ░      ░  ░ ░        ░     ░  ░   ░            ░  ░         #
+            #                                                                           #
+            #                             Windows Multi-Tool                            #
+            #                                                                           #
+            #     1. Serienummeret på disken på maskinen                                #
+            #     2. De ti største/længste filer på maskinen                            #
+            #     3. Find de ti ældste dll filer på maskinen                            #
+            #                                                                           #
+            #     4. HotFix’es på maskinen sorteret efter Description                   #
+            #     5. Ledig fysisk hukommelse                                            #
+            #     6. Ledig virtuel hukommelse                                           #
+            #                                                                           #
+            #     7. PowerShell versionen                                               #
+            #                                                                           #
+            #     0. Slut                                                               #
+            #                                                                           #
+            #     67. ???                                                               #
+            #                                                                           #
+            #---------------------------------------------------------------------------#
+            " -ForegroundColor Magenta
 
-        $hovedmenu = Read-Host "Indtast valgmulighed"
+        $hovedmenu = Read-Host "Indtast valgmulighed" 
         # Read-Host afventer indtastning fra bruger. 
         # $hovedmenu vil efterfølgende indeholde de indtastede tegn.
 
@@ -223,8 +235,8 @@ function Find-PSVersion
 # 67. ???
 function ???
 {
-
-'⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⣤⣤⣴⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣦⣤⣤⣤⣀⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    $art = @'
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⣤⣤⣴⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣦⣤⣤⣤⣀⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⢿⣟⣛⣭⡽⠶⠶⠶⠮⠭⠭⣭⣭⣭⣭⣭⣭⣭⣿⣿⣯⣭⣥⣄⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⣿⣿⢟⣫⣶⠿⣫⣭⣶⠿⠿⣿⣿⣿⠿⢿⣷⣶⣮⣭⣭⣭⣭⣭⣷⣶⣶⣶⣾⣽⣿⣷⣦⡀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⣸⣿⣿⣿⣫⣾⣟⣩⣞⣫⣵⣿⣿⣿⣿⣿⣿⣿⣯⢻⣿⣿⣿⣿⣿⣿⢻⣿⣿⣿⣿⣶⣍⡻⣿⣿⣿⣷⠀⠀⠀⠀⠀
@@ -244,10 +256,30 @@ function ???
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠿⢷⣮⣝⡻⢿⣷⣮⣭⣛⣻⠿⠿⣿⣶⣶⣶⣶⣿⣿⣿⠿⢿⣛⣽⣾⣿⡿⣹⣿⣿⡇⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠻⢿⣾⣶⣭⣽⣛⣛⠿⠿⠶⢶⣶⣶⣶⣶⡿⠿⠿⢟⣛⣭⣷⣿⣿⣿⣿⠇⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠛⠻⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠛⠛⠛⠛⠿⠿⠛⠛⠛⠉⠁⠀⠀⠀⠀⠀'
-Write-Host 'Tast enter' -NoNewline
-Read-Host
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠛⠛⠛⠛⠿⠿⠛⠛⠛⠉⠁⠀⠀⠀⠀⠀
+'@
 
+    Write-Host "Spamming message. Try Ctrl+C to return to the menu..." -ForegroundColor Yellow
+
+    try {
+        while ($true) {
+            Clear-Host
+            Write-Host $art
+            Start-Sleep -Milliseconds 300
+        }
+    }
+    catch [System.Management.Automation.PipelineStoppedException] {
+        Write-Host "`nCtrl+C detected — returnerer til menu..." -ForegroundColor Green
+        Start-Sleep -Milliseconds 700
+    }
+    catch [System.OperationCanceledException] {
+        Write-Host "`nAfbrudt — returnerer til menu..." -ForegroundColor Green
+        Start-Sleep -Milliseconds 700
+    }
+    catch {
+        Write-Host "`nUventet fejl: $_" -ForegroundColor Red
+        Start-Sleep -Milliseconds 700
+    }
 }
 
 # 0. Slut
