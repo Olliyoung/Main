@@ -1,0 +1,3 @@
+UPDATE DBO.CELLAR
+SET BOTTLES = BOTTLES - 1
+WHERE LABEL = 'Alsace Grand Cru Ollwiller Riesling'

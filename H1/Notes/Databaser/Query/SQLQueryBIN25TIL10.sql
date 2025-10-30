@@ -1,0 +1,3 @@
+UPDATE dbo.Cellar
+SET BOTTLES = 10
+WHERE BIN = 25

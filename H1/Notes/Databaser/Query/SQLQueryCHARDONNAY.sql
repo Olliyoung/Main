@@ -1,0 +1,3 @@
+UPDATE DBO.CELLAR
+SET BOTTLES = BOTTLES + 6
+WHERE LABEL = 'Ocean Spirit Chardonnay'
