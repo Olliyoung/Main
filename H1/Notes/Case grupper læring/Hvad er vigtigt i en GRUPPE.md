@@ -1,0 +1,14 @@
+- Stuktur
+- Opfølgning
+- Buddy
+- Bliv færdig
+- Planer / Tidsplan
+- Prioritering / Opdeling
+- Dokumentation
+- Møder
+- Åbenhed / Hjælp
+- Vidensdeling / Læring
+- Kravsspecifikation
+- Pauser / Fri
+- Disciplin
+- Roller

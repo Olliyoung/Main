@@ -1,0 +1,46 @@
+- 1. Filtyper: NTFS vs ReFS
+	- NTFS er den filsystem-type, Windows bruger mest. Det kan alt det smarte som at styre rettigheder, kryptere filer, komprimere og meget mere. Du kan stort set bruge det til alt – det er meget alsidigt.
+	- ReFS er en nyere type, som er bygget til at være mere robust og modstandsdygtig over for fejl og datakorruption. Det er super, hvis du har store lagre og vil sikre, at dine data ikke bliver beskadiget. Men det mangler nogle af de features, NTFS har (fx kryptering), så det er ikke altid det bedste valg.
+- 2. Diske, Partitioner & Volumes
+	- MBR vs GPT
+		- MBR er den gamle måde at opdele harddiske på, og den kan kun håndtere op til 2 TB og har begrænsede partitioner.
+		- GPT er den nye og bedre måde, som kan håndtere kæmpe store diske og mange partitioner.
+	- Basic vs Dynamic disks
+		- Basic disk er bare “almindelige” diske med partitioner.
+		- Dynamic disk er mere avancerede: her kan du lave spejlinger (mirroring), striping, og andre fancy ting som at kombinere flere diske til et enkelt volume.
+	- Volumes og mount points
+		- Et volume er som en “kasse” til dine data.
+		- Du kan også “montere” et volume inde i en tom mappe i stedet for at give det et drevbogstav – det er smart, hvis du løber tør for bogstaver.
+- 3. Storage Spaces & Storage Pools
+	- Tænk på Storage Pools som en stor skuffe, hvor du smider flere harddiske sammen. Herfra kan du så lave “virtuelle diske” (Storage Spaces), som serveren ser som én stor disk.
+	- Du kan vælge, hvordan dine data bliver gemt:
+		- Simple: bare gem som de er – ingen beskyttelse, men hurtigt.
+		- Mirror: gem to kopier – hvis en disk går ned, har du stadig en kopi.
+		- Parity: lidt som RAID-5 – lidt langsommere, men sparer plads og beskytter data
+- 4. RAID og Sikkerhed
+	- RAID 0: splitter dine data på tværs af flere diske – superhurtigt, men hvis en disk fejler, mister du alt.
+	- RAID 1: spejler dine data – så har du en kopi, hvis noget går galt
+	- RAID 5: kombinerer hastighed og sikkerhed ved at gemme “paritet” (en slags backup).
+- 5. Netværkslager: iSCSI og Fibre Channel
+	- iSCSI er en måde at bruge netværket til at give adgang til lagerplads, næsten som om det var en lokal disk.
+	- Fibre Channel er en rigtig hurtig og pålidelig netværksteknologi til lagring, men den bruges mest i større virksomheder.
+- 6. Rettigheder og Kvoter
+	- NTFS rettigheder styrer, hvem der må læse eller skrive til filer.
+	- Delingsrettigheder gælder, når du deler en mappe ud på netværket.
+	- Den strengeste regel mellem de to gælder altid.
+	- Diskkvoter hjælper dig med at sætte grænser for, hvor meget plads hver bruger må bruge, så én person ikke fylder hele harddisken
+- 7. Data deduplikering og tynd provisioning
+	- Data deduplikering finder og fjerner dubletter af filer for at spare plads. Det er fedt, hvis du har mange ens filer (fx mange kopier af dokumenter).
+	- Tynd provisioning betyder, at du “låner” mere plads, end du faktisk har, og så sørger serveren for at give dig mere plads, når det bliver nødvendigt.
+- 8. Replikering (hvis dækket)
+	- At have en kopi af dine data et andet sted kan være en livredder, hvis noget går galt.
+	- Med Storage Replica kan du synkronisere data mellem to servere, så de altid er opdaterede.
+- 9. Værktøjer til styring
+	- Server Manager er den grafiske måde at styre diske og lagring på.
+	- PowerShell er dit stærke kommandolinjeværktøj til at automatisere alt det her.
+	- Disk Management er et nemt værktøj til at opdele og formatere diske.
+- How to setup RAID / Øvelse 2
+	- ![02 - Vedligeholdelse v.22.2.2.pdf](../assets/02_-_Vedligeholdelse_v.22.2.2_1760603277589_0.pdf)
+	- Øvelse 2
+- følg chapter 3 i MSCA 2016
+	- ![MCSA Windows Server 2016 Complete Study Guide_ Exam 70-740, Exam 70-741, Exam 70-742, and Exam 70-743.pdf](../assets/MCSA_Windows_Server_2016_Complete_Study_Guide_Exam_70-740,_Exam_70-741,_Exam_70-742,_and_Exam_70-743_1760603162141_0.pdf)

@@ -1,0 +1,13 @@
+- **Full backup**
+	- Backup af hele databsen, som den så ud, umiddelbart før backuppen afslutter
+	- Det er godtat lave en full backup en gang i mellem (Rollback)
+- **Differentiel backup**
+	- En differentiel backup er baseret på nyeste forudgående full backup (Denne full backup kaldes basen)
+	- En differentiel backup "indfanger" kun data, der er blevet ændret efter basen.
+- **Transaktionslog**
+	- Backup a transaktionsloggen
+- "***CopyOnly backup***"
+	- En ReadOnly backup indeholder det samme som en "normal" backup, men bryde rikke kden af backups
+- **Partiel backup / fil backup**
+	- I SQL Server er det også muligt at tage backup af enkelte datafil eller filgrupper
+- ![SQL Backup: The Ultimate Guide for Success | 2025 Updated](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flitextension.com%2Fblog%2Fwp-content%2Fuploads%2F2024%2F11%2Ftypes-of-sql-backup.webp&f=1&nofb=1&ipt=5ab2dfd31bd3cc070ddf59758cfe86cc80cc8a952f7f624a1972d7b8b49d8e32)
