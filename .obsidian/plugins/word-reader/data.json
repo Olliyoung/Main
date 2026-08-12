@@ -36,6 +36,25 @@
         "panelVisible": true,
         "collapsedIds": []
       }
+    },
+    {
+      "path": "H1/Notes/RAID/SoftRAID.xlsx",
+      "mtime": 1785827986539,
+      "format": "xlsx",
+      "lastAccessed": 146,
+      "position": {
+        "scrollLeft": 0,
+        "scrollTop": 0,
+        "page": 1
+      },
+      "zoom": {
+        "scale": 1,
+        "fit": true
+      },
+      "navigation": {
+        "panelVisible": false,
+        "collapsedIds": []
+      }
     }
   ]
 }

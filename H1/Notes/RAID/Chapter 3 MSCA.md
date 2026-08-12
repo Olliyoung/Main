@@ -9,7 +9,7 @@
 		- Basic disk er bare “almindelige” diske med partitioner.
 		- Dynamic disk er mere avancerede: her kan du lave spejlinger (mirroring), striping, og andre fancy ting som at kombinere flere diske til et enkelt volume.
 	- Volumes og mount points
-		- Et volume er som en “kasse” til dine data.
+		- Et volume er som en “kasse” hub make monetil dine data.
 		- Du kan også “montere” et volume inde i en tom mappe i stedet for at give det et drevbogstav – det er smart, hvis du løber tør for bogstaver.
 - 3. Storage Spaces & Storage Pools
 	- Tænk på Storage Pools som en stor skuffe, hvor du smider flere harddiske sammen. Herfra kan du så lave “virtuelle diske” (Storage Spaces), som serveren ser som én stor disk.
@@ -43,4 +43,4 @@
 	- ![02 - Vedligeholdelse v.22.2.2.pdf](../assets/02_-_Vedligeholdelse_v.22.2.2_1760603277589_0.pdf)
 	- Øvelse 2
 - følg chapter 3 i MSCA 2016
-	- ![MCSA Windows Server 2016 Complete Study Guide_ Exam 70-740, Exam 70-741, Exam 70-742, and Exam 70-743.pdf](../assets/MCSA_Windows_Server_2016_Complete_Study_Guide_Exam_70-740,_Exam_70-741,_Exam_70-742,_and_Exam_70-743_1760603162141_0.pdf)
+	- ![MCSA Windows Server 2016 Complete Study Guide_ Exam 70-740, Exam 70-741, Exam 70-742, and Exam 70-743.pdf](../assets/MCSA_Windows_Server_2016_Complete_Study_Guide_Exam_70-740,_Exam_70-741,_Exam_70-742,_and_Exam_70-743_1760603162141_0.pdf)hub make mone
