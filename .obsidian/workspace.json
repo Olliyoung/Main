@@ -13,10 +13,10 @@
             "state": {
               "type": "pdf",
               "state": {
-                "file": "Network 1/Oversigt DIV/FILES WITH INFO/modul00 Velkommen til Netværk I + II.pdf"
+                "file": "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk I/SRWE_Module_01-Basic Device Configuration.pdf"
               },
               "icon": "lucide-file-text",
-              "title": "modul00 Velkommen til Netværk I + II"
+              "title": "SRWE_Module_01-Basic Device Configuration"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Network 1/Oversigt DIV/FILES WITH INFO/modul00 Velkommen til Netværk I + II.pdf",
+                "file": "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk I/SRWE_Module_01-Basic Device Configuration.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -141,13 +141,23 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Network 1/Oversigt DIV/FILES WITH INFO/modul00 Velkommen til Netværk I + II.pdf",
+                "file": "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk I/SRWE_Module_01-Basic Device Configuration.pdf",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
               "title": "Outline"
+            }
+          },
+          {
+            "id": "34173a99bd368b35",
+            "type": "leaf",
+            "state": {
+              "type": "hub-chat-view",
+              "state": {},
+              "icon": "brain-circuit",
+              "title": "LLM Hub"
             }
           }
         ],
@@ -167,31 +177,34 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "bases:Create new base": false,
-      "audio-recorder:Start/stop recording": false
+      "audio-recorder:Start/stop recording": false,
+      "llm-hub:Open chat": false
     }
   },
-  "active": "61ae1a23b98c0965",
+  "active": "3f56c78c37a5050c",
   "lastOpenFiles": [
+    "Network 1/Netacad/Packet Tracer/Packet tracer saves/Øvelse.v.1.pkt",
+    "Network 1/Netacad/Packet Tracer/Øvelsen.md",
+    "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk II/ENSA_Module 14 Network Automation.pdf",
+    "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk II/ENSA_Module 13 Network Virtualization.pdf",
+    "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk II/ENSA_Module 12 Network Troubleshooting.pdf",
+    "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk II/ENSA_Module 11 Network Design.pdf",
+    "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk II/ENSA_Module 10 Network Management.pdf",
+    "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk II/ENSA_Module 09 QoS Concepts.pdf",
+    "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk II/ENSA_Module 08 VPN and IPsec Concepts.pdf",
+    "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk II/ENSA_Module 07 WAN Concepts.pdf",
+    "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk II/ENSA_Module 06 NAT for IPv4.pdf",
+    "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk II/ENSA_Module 05 ACLs for IPv4 Configuration.pdf",
     "Network 1/Oversigt DIV/Network.md",
-    "Network 1/Oversigt DIV/FILES WITH INFO/modul00 Velkommen til Netværk I + II.pdf",
-    "Network 1/Oversigt DIV/FILES WITH INFO/SRWE og ENSA oversigt over indhold.docx",
     "H1/Notes/RAID/Chapter 3 MSCA.md",
     "H1/CASE/Untitled.md",
     "README.md",
     "Untitled.canvas",
     "H1/Notes/Opgaver/Uninterrupted Power Supply.md",
-    "Untitled.base",
-    "H1/Notes/Opgaver/TænkeOpgave.pdf",
-    "H1/Notes/RAID/RAID6.pdf",
-    "H1/Notes/RAID/SoftRAID.xlsx",
     "H1/Notes/Server Administration & Security/Understanding  Security Layers.md",
-    "H1/Notes/RAID/JBOD.pdf",
     "H1/Notes/Case grupper læring/Hvad er vigtigt i en GRUPPE.md",
-    "H1/CASE/SWOT/GRUPPE SWOT A-O-E.pdf",
     "Network 1/lærings log.md",
     "Pasted image 20251127092737.png",
-    "Network 1/Oversigt DIV/FILES WITH INFO",
-    "Network 1/Oversigt DIV",
     "Servertek/Servertek.md",
     "Servertek/screenshots til aflevering/Firewall Internal.png",
     "Servertek/screenshots til aflevering/Firewall External.png",
