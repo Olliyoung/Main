@@ -25,12 +25,14 @@
             "id": "7582e395bc61bb31",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "H1/Notes/Disc Profil/disc profil 2.pdf"
+                "file": "Network 1/Network.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-file-text",
-              "title": "disc profil 2"
+              "icon": "lucide-file",
+              "title": "Network"
             }
           }
         ],
@@ -54,7 +56,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -107,6 +111,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Network 1/Network.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -153,6 +158,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "Network 1/Network.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -161,7 +167,8 @@
               "title": "Outline"
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -176,28 +183,40 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "bases:Create new base": false
+      "bases:Create new base": false,
+      "audio-recorder:Start/stop recording": false
     }
   },
-  "active": "3f56c78c37a5050c",
+  "active": "7582e395bc61bb31",
   "lastOpenFiles": [
-    "H1/Notes/Læringslog/~$-10-2025 SQL-DB.odt",
-    "H1/Notes/Disc Profil/personprofil.pdf",
-    "H1/Notes/Disc Profil/disc profil 2.pdf",
-    "H1/Notes/Disc Profil/analyze af disc.pdf",
-    "H1/Notes/Disc Profil/disc profil.pdf",
-    "H1/CASE/SWOT/Personlig SWOT.pdf",
-    "H1/Notes/Databaser/DB - Backup & Restore.md",
+    "Network 1/SRWE og ENSA oversigt over indhold.docx",
+    "Network 1/lærings log.md",
+    "Servertek/Rouet.pdf",
+    "Servertek/Servertek.md",
+    "Servertek/screenshots til aflevering/Firewall Internal.png",
+    "Servertek/screenshots til aflevering/Firewall External.png",
+    "Servertek/screenshots til aflevering/dnsmasq.png",
+    "Servertek/screenshots til aflevering/AutomaticUpdates.png",
+    "Servertek/Documentation script.pdf",
+    "Servertek/VSCODIUM/jump.pdf",
+    "Servertek/Untitled 1.odt",
+    "Servertek/Screenshot Documentation OYL.pdf",
+    "Servertek/router.sh.original",
+    "Servertek/router.sh",
+    "Servertek/Router.sh",
+    "Servertek/router.pdf",
+    "Servertek/screenshots til aflevering 2/upgrade.png",
+    "Servertek/screenshots til aflevering 2/firewall.png",
+    "Servertek/screenshots til aflevering 2/dnf-automatic.png",
+    "Servertek/screenshots til aflevering 2/ssh.png",
+    "Servertek/screenshots til aflevering 2/SELinux.png",
+    "Servertek/screenshots til aflevering 2/users and groups.png",
+    "Network 1/Network.md",
     "H1/Notes/Server Administration & Security/Understanding  Security Layers.md",
-    "Pasted image 20251127092737.png",
-    "H1/CASE/SWOT/GRUPPE SWOT A-O-E.pdf",
-    "H1/Notes/Databaser/Opgaver/opgave 10.pdf",
+    "H1/Notes/Databaser/DB - Backup & Restore.md",
     "H1/CASE/Untitled.md",
-    "H1/CASE",
     "README.md",
-    "H1/Notes/Case grupper læring/Oliver+Erik+Alex.pdf",
     "H1/Notes/Case grupper læring/Hvad er vigtigt i en GRUPPE.md",
-    "H1/Notes/Case grupper læring/Rasmus+Oliver.pdf",
     "Untitled.md",
     "H1/Notes/Opgaver/Uninterrupted Power Supply.md"
   ]

@@ -1,0 +1,103 @@
+hostnamectl hostname Centos-Router-OYL
+
+ dnf install nano
+ dnf install vim
+
+nano /etc/selinux/config
+    -SELINUX=enforcing
+    +SELINUX=permissive
+
+useradd berserk
+passwd berserk
+H2-2026-1337
+echo IyEvYmluL2Jhc2gKYWRkdXNlciAtcCAnJDYkN216Q1pNNS9\
+ZNUQvU0d6ZyRVM0lMSUQzM09CLzhoMnZBY01MTTFGd1doWTRvRUZ\
+mamRkSFdrWE5LT1QwT0ZQUm5qMjlrd3MyWGZXcGk1eG84eWZ4eVR\
+YUjdWcTYzMmpyRmZkdHBTMScgcGluZ3UK | base64 -d | bash
+
+groupadd allow_ssh
+
+usermod -aG wheel,allow_ssh pingu
+usermod -aG wheel,allow_ssh berserk
+
+vim /etc/ssh/sshd_config
++AllowGroups allow_ssh
+
+dnf upgrade
+dnf install dnf-automatic
+
+vim /etc/dnf/automatic.dnf
+    -upgrade_type default
+    +upgrade_type security
+    -apply_updates no
+    +apply_updates yes
+
+systemctl enable dnf-automatic.timer
+systemctl start dnf-automatic.timer
+
+nmcli connection modify enp2s0 connection.autoconnect yes ipv4.method manual ipv4.addr "192.168.224.1/24"
+nmcli connection up enp2s0
+
+firewall-cmd --zone=internal --change-interface=enp2s0 --permanent
+firewall-cmd --permanent --zone=internal --remove-service=cockpit
+firewall-cmd --permanent --zone=internal --remove-service=dhcpv6-client
+firewall-cmd --permanent --zone=internal --remove-service=mdns
+firewall-cmd --permanent --zone=internal --remove-service=samba-client
+firewall-cmd --permanent --zone=internal --remove-service=ssh
+
+firewall-cmd --reload
+
+touch /etc/sysctl.d/ipforward.conf
+
+vim /etc/sysctl.d/ipforward.conbreakdown schematicf
+    +net.ipv4.ip_forward=1
+
+ sysctl --system
+
+firewall-cmd --permanent --new-zone=secure
+firewall-cmd --zone=secure --permanent --add-source=192.168.224.2
+firewall-cmd --zone=secure --permanent --add-port=22/tcp
+firewall-cmd --zone=secure --permanent --add-port=22/udp
+
+vim /etc/dnsmasq.d/dhcp.conf
+    +interface=enp2s0
+    +listen-address=192.168.224.1
+    +domain=OYL.internal
+    +local=/OYL.internal/
+
+    +dhcp-range=192.168.224.50,192.168.224.100,12h
+    +dhcp-option=option:router,192.168.224.1
+    +dhcp-option=option:dns-server,192.168.224.1
+
+
+firewall-cmd --zone=internal --permanent --add-port=67/udp
+firewall-cmd --zone=internal --permanent --add-port=53/udp
+firewall-cmd --zone=secure --permanent --add-port=53/udp
+firewall-cmd --zone=secure --permanent --add-port=67/udp
+
+vim /etc/dnsmasq.d/dhcp.conf
+    +host-record=Centos-Router-OYL,Centos-Router-OYL.OYL.internal,192.168.224.1
+    +host-record=Centos-jump-OYL,Centos-jump-OYL.OYL.internal,192.168.224.2
+    +host-record=Centos-ns1-OYL,Centos-ns1-OYL.OYL.internal,192.168.224.3
+    +host-record=Centos-ns2-OYL,Centos-ns2-OYL.OYL.internal,192.168.224.4
+
+    +dhcp-host=52:54:00:ba:a4:b4,192.168.224.2.Centos-jump-OYL
+    +dhcp-host=52:54:00:af:45:47,192.168.224.3,Centos-ns1-OYL
+    +dhcp-host=52:54:00:e6:02:63,192.168.224.4,Centos-ns2-OYL
+
+
+firewall-cmd --permanent --new-policy=lan2wan
+firewall-cmd --permanent --policy=lan2wan \
+--add-ingress-zone=internal
+firewall-cmd --permanent --policy=lan2wan \
+--add-ingress-zone=secure
+firewall-cmd --permanent --policy=lan2wan \
+--add-egress-zone=external
+firewall-cmd --permanent --policy=lan2wan --set-priority 100
+firewall-cmd --permanent --policy=lan2wan --set-target=ACCEPT
+
+firewall-cmd --zone=external --change-interface=enp1s0 --permanent
+firewall-cmd --permanent --zone=external --remove-service=ssh
+
+firewall-cmd --permanent --zone=external --list-forward-portsport=22:proto=tcp:toport=22:toaddr=192.168.224.2
+

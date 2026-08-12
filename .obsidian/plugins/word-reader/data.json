@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "common": {
+    "language": "zh-CN",
+    "defaultZoomPercent": 100,
+    "largeFileWarningMb": 25
+  },
+  "docx": {
+    "defaultFitWidth": false,
+    "showOutlineByDefault": true,
+    "enableImagePreview": true
+  },
+  "pptx": {
+    "defaultFitWindow": true,
+    "showNavigationByDefault": true,
+    "showNotesByDefault": false
+  },
+  "xlsx": {
+    "defaultFitWidth": true
+  },
+  "readingStates": [
+    {
+      "path": "Network 1/SRWE og ENSA oversigt over indhold.docx",
+      "mtime": 1786519662493,
+      "format": "docx",
+      "lastAccessed": 144,
+      "position": {
+        "scrollLeft": 72,
+        "scrollTop": 3800
+      },
+      "zoom": {
+        "scale": 1,
+        "fit": false
+      },
+      "navigation": {
+        "panelVisible": true,
+        "collapsedIds": []
+      }
+    }
+  ]
+}
