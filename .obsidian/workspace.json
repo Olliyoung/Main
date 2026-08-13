@@ -11,12 +11,14 @@
             "id": "61ae1a23b98c0965",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk I/SRWE_Module_01-Basic Device Configuration.pdf"
+                "file": "Network 1/Netacad/Packet Tracer/Øvelsen.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-file-text",
-              "title": "SRWE_Module_01-Basic Device Configuration"
+              "icon": "lucide-file",
+              "title": "Øvelsen"
             }
           }
         ]
@@ -53,7 +55,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#/tag:#/",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -74,7 +76,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -181,8 +184,11 @@
       "llm-hub:Open chat": false
     }
   },
-  "active": "3f56c78c37a5050c",
+  "active": "61ae1a23b98c0965",
   "lastOpenFiles": [
+    "Network 1/Oversigt DIV/Network.md",
+    "Network 1/Oversigt DIV/FILES WITH INFO/modul00 Velkommen til Netværk I + II.pdf",
+    "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk I/SRWE_Module_01-Basic Device Configuration.pdf",
     "Network 1/Netacad/Packet Tracer/Packet tracer saves/Øvelse.v.1.pkt",
     "Network 1/Netacad/Packet Tracer/Øvelsen.md",
     "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk II/ENSA_Module 14 Network Automation.pdf",
@@ -192,10 +198,6 @@
     "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk II/ENSA_Module 10 Network Management.pdf",
     "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk II/ENSA_Module 09 QoS Concepts.pdf",
     "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk II/ENSA_Module 08 VPN and IPsec Concepts.pdf",
-    "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk II/ENSA_Module 07 WAN Concepts.pdf",
-    "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk II/ENSA_Module 06 NAT for IPv4.pdf",
-    "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk II/ENSA_Module 05 ACLs for IPv4 Configuration.pdf",
-    "Network 1/Oversigt DIV/Network.md",
     "H1/Notes/RAID/Chapter 3 MSCA.md",
     "H1/CASE/Untitled.md",
     "README.md",
