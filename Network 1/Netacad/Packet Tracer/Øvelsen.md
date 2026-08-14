@@ -55,3 +55,9 @@ same on S2 but hostname S2 and IP 192.168.0.102:
 turn ports on: interface (xxxxx) no shutdown
 
 save: wr
+
+dhcp:
+ip dhcp excluded-address 192.168.200.33
+ip dhcp pool NET2
+network 192.168.200.32 255.255.255.224
+default-router 192.168.200.33
