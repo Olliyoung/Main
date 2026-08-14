@@ -11,14 +11,12 @@
             "id": "61ae1a23b98c0965",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "word-reader-view",
               "state": {
-                "file": "Network 1/Netacad/Packet Tracer/Øvelsen.md",
-                "mode": "source",
-                "source": false
+                "file": "Network 1/Netacad/Packet Tracer/Vlan & Inter-VLAN Routing/Opgaven/Byg selv_VLANs_april25.docx"
               },
-              "icon": "lucide-file",
-              "title": "Øvelsen"
+              "icon": "file-text",
+              "title": "Byg selv_VLANs_april25.docx"
             }
           }
         ]
@@ -76,8 +74,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -164,12 +161,11 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -186,18 +182,19 @@
   },
   "active": "61ae1a23b98c0965",
   "lastOpenFiles": [
+    "Network 1/Netacad/Packet Tracer/Vlan & Inter-VLAN Routing/Commands i used.md",
+    "Network 1/Commands & stuff.md",
     "Network 1/Oversigt DIV/Network.md",
+    "Network 1/Netacad/Packet Tracer/DHCP & Switchport Secuirty/PKT/Opgave DHCP OYL FÆRDIG.pkt",
+    "Network 1/Netacad/Packet Tracer/Vlan & Inter-VLAN Routing/Opgaven",
+    "Network 1/Netacad/Packet Tracer/Vlan & Inter-VLAN Routing/PKT",
+    "Network 1/Netacad/Packet Tracer/DHCP & Switchport Secuirty/PKT",
+    "Network 1/Netacad/Packet Tracer/DHCP & Switchport Secuirty",
+    "Network 1/Netacad/Packet Tracer/Vlan & Inter-VLAN Routing/Opgaven/Byg selv_VLANs_april25.docx",
+    "Network 1/Netacad/Packet Tracer/Vlan & Inter-VLAN Routing",
     "Network 1/Oversigt DIV/FILES WITH INFO/modul00 Velkommen til Netværk I + II.pdf",
     "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk I/SRWE_Module_01-Basic Device Configuration.pdf",
     "Network 1/Netacad/Packet Tracer/Packet tracer saves/Øvelse.v.1.pkt",
-    "Network 1/Netacad/Packet Tracer/Øvelsen.md",
-    "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk II/ENSA_Module 14 Network Automation.pdf",
-    "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk II/ENSA_Module 13 Network Virtualization.pdf",
-    "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk II/ENSA_Module 12 Network Troubleshooting.pdf",
-    "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk II/ENSA_Module 11 Network Design.pdf",
-    "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk II/ENSA_Module 10 Network Management.pdf",
-    "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk II/ENSA_Module 09 QoS Concepts.pdf",
-    "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk II/ENSA_Module 08 VPN and IPsec Concepts.pdf",
     "H1/Notes/RAID/Chapter 3 MSCA.md",
     "H1/CASE/Untitled.md",
     "README.md",

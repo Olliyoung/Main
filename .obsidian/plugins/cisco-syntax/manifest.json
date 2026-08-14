@@ -1,0 +1,10 @@
+{
+	"id": "cisco-syntax",
+	"name": "Cisco Syntax",
+	"version": "0.2.0",
+	"minAppVersion": "1.5.0",
+	"description": "Syntax highlighting for Cisco IOS, IOS-XE, IOS-XR and NX-OS configuration in fenced code blocks, in both Reading mode and Live Preview.",
+	"author": "Blake Bratcher",
+	"authorUrl": "https://github.com/blakebratcher",
+	"isDesktopOnly": false
+}

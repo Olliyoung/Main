@@ -55,6 +55,24 @@
         "panelVisible": false,
         "collapsedIds": []
       }
+    },
+    {
+      "path": "Network 1/Netacad/Packet Tracer/Vlan & Inter-VLAN Routing/Opgaven/Byg selv_VLANs_april25.docx",
+      "mtime": 1786699498264,
+      "format": "docx",
+      "lastAccessed": 255,
+      "position": {
+        "scrollLeft": 0,
+        "scrollTop": 120
+      },
+      "zoom": {
+        "scale": 1,
+        "fit": false
+      },
+      "navigation": {
+        "panelVisible": true,
+        "collapsedIds": []
+      }
     }
   ]
 }

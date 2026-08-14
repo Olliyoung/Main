@@ -1,0 +1,116 @@
+/*
+ * Cisco Syntax Highlight
+ *
+ * One stylesheet covers both views:
+ *   - Reading mode markup:  pre.cisco-syntax-block  code  span.token.<type>
+ *   - Live Preview markup:  .cm-line  span.cisco.token.<type>
+ *
+ * Colors resolve through --cisco-* custom properties that default to the active
+ * theme's --code-* variables and are overridden by the "Vibrant" scheme.
+ */
+
+body {
+	--cisco-comment: var(--code-comment, var(--text-faint));
+	--cisco-string: var(--code-string, var(--text-accent));
+	--cisco-keyword: var(--code-keyword, var(--text-accent));
+	--cisco-protocol: var(--code-tag, var(--text-accent));
+	--cisco-interface: var(--code-function, var(--text-accent));
+	--cisco-value: var(--code-value, var(--code-normal, var(--text-normal)));
+	--cisco-secret: var(--code-attribute, var(--code-value, var(--text-normal)));
+	--cisco-negation: var(--color-red, var(--code-important, #e5534b));
+	--cisco-operator: var(--code-operator, var(--text-muted));
+	--cisco-punctuation: var(--code-punctuation, var(--text-muted));
+	--cisco-bold: 600;
+}
+
+body.cisco-syntax-no-bold {
+	--cisco-bold: inherit;
+}
+
+/* ---- Vibrant palette (opt-in), tuned per light/dark ---------------------- */
+
+body.cisco-syntax-vibrant.theme-dark {
+	--cisco-comment: #7f8c98;
+	--cisco-string: #7ee787;
+	--cisco-keyword: #ff7b72;
+	--cisco-protocol: #d2a8ff;
+	--cisco-interface: #79c0ff;
+	--cisco-value: #ffa657;
+	--cisco-secret: #ff9ecd;
+	--cisco-negation: #ff6b6b;
+	--cisco-operator: #a5d6ff;
+	--cisco-punctuation: #8b949e;
+}
+
+body.cisco-syntax-vibrant.theme-light {
+	--cisco-comment: #6a737d;
+	--cisco-string: #0a7d33;
+	--cisco-keyword: #cf222e;
+	--cisco-protocol: #8250df;
+	--cisco-interface: #0969da;
+	--cisco-value: #bc4c00;
+	--cisco-secret: #a01a58;
+	--cisco-negation: #d1242f;
+	--cisco-operator: #0550ae;
+	--cisco-punctuation: #57606a;
+}
+
+/* ---- Tokens (both views) ------------------------------------------------- */
+
+.cisco-syntax-block .token.comment,
+.cisco.token.comment {
+	color: var(--cisco-comment);
+	font-style: italic;
+}
+
+.cisco-syntax-block .token.string,
+.cisco.token.string {
+	color: var(--cisco-string);
+}
+
+.cisco-syntax-block .token.keyword,
+.cisco.token.keyword {
+	color: var(--cisco-keyword);
+	font-weight: var(--cisco-bold);
+}
+
+.cisco-syntax-block .token.protocol,
+.cisco.token.protocol {
+	color: var(--cisco-protocol);
+	font-weight: var(--cisco-bold);
+}
+
+.cisco-syntax-block .token.interface,
+.cisco.token.interface {
+	color: var(--cisco-interface);
+}
+
+.cisco-syntax-block .token.ip-address,
+.cisco-syntax-block .token.ipv6-address,
+.cisco-syntax-block .token.mac-address,
+.cisco-syntax-block .token.number,
+.cisco.token.ip-address,
+.cisco.token.ipv6-address,
+.cisco.token.mac-address,
+.cisco.token.number {
+	color: var(--cisco-value);
+}
+
+.cisco-syntax-block .token.secret,
+.cisco.token.secret {
+	color: var(--cisco-secret);
+}
+
+.cisco-syntax-block .token.negation,
+.cisco.token.negation {
+	color: var(--cisco-negation);
+	font-weight: 700;
+}
+
+.cisco.token.operator {
+	color: var(--cisco-operator);
+}
+
+.cisco.token.punctuation {
+	color: var(--cisco-punctuation);
+}
