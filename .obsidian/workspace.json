@@ -11,12 +11,14 @@
             "id": "61ae1a23b98c0965",
             "type": "leaf",
             "state": {
-              "type": "word-reader-view",
+              "type": "markdown",
               "state": {
-                "file": "Network 1/Netacad/Packet Tracer/Vlan & Inter-VLAN Routing/Opgaven/Byg selv_VLANs_april25.docx"
+                "file": "Network 1/Commands & stuff.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "file-text",
-              "title": "Byg selv_VLANs_april25.docx"
+              "icon": "lucide-file",
+              "title": "Commands & stuff"
             }
           }
         ]
@@ -182,19 +184,20 @@
   },
   "active": "61ae1a23b98c0965",
   "lastOpenFiles": [
+    "Network 1/Netacad/Packet Tracer/DHCP & Switchport Secuirty/PKT/Opgave DHCP OYL FÆRDIG.pkt~",
+    "Network 1/Netacad/Packet Tracer/DHCP & Switchport Secuirty/Extension to DHCP & Switchport/PKT/Opgave DHCP OYL FÆRDIG EXTENSION.pkt",
+    "Network 1/Netacad/Packet Tracer/DHCP & Switchport Secuirty/Extension to DHCP & Switchport/PKT/Opgave DHCP OYL FÆRDIG.pkt~",
+    "Network 1/Netacad/Packet Tracer/Vlan & Inter-VLAN Routing/Opgaven/Byg selv_VLANs_april25.docx",
+    "Network 1/Netacad/Packet Tracer/DHCP & Switchport Secuirty/Extension to DHCP & Switchport/PKT/Opgave DHCP OYL FÆRDIG.pkt",
+    "Network 1/Netacad/Packet Tracer/DHCP & Switchport Secuirty/Extension to DHCP & Switchport/Opgaven/Byg selv_VLANs_april25.odt",
+    "Network 1/Netacad/Packet Tracer/DHCP & Switchport Secuirty/Extension to DHCP & Switchport/Opgaven/lu81449vzkxi.tmp",
+    "Network 1/Netacad/Packet Tracer/DHCP & Switchport Secuirty/Extension to DHCP & Switchport/PKT",
+    "Network 1/Netacad/Packet Tracer/DHCP & Switchport Secuirty/Extension to DHCP & Switchport/Opgaven",
+    "Network 1/Netacad/Packet Tracer/DHCP & Switchport Secuirty/Extension to DHCP & Switchport",
+    "Network 1/Netacad/Packet Tracer/Packet tracer saves/Øvelse.v.1.pkt~",
     "Network 1/Netacad/Packet Tracer/Vlan & Inter-VLAN Routing/Commands i used.md",
     "Network 1/Commands & stuff.md",
     "Network 1/Oversigt DIV/Network.md",
-    "Network 1/Netacad/Packet Tracer/DHCP & Switchport Secuirty/PKT/Opgave DHCP OYL FÆRDIG.pkt",
-    "Network 1/Netacad/Packet Tracer/Vlan & Inter-VLAN Routing/Opgaven",
-    "Network 1/Netacad/Packet Tracer/Vlan & Inter-VLAN Routing/PKT",
-    "Network 1/Netacad/Packet Tracer/DHCP & Switchport Secuirty/PKT",
-    "Network 1/Netacad/Packet Tracer/DHCP & Switchport Secuirty",
-    "Network 1/Netacad/Packet Tracer/Vlan & Inter-VLAN Routing/Opgaven/Byg selv_VLANs_april25.docx",
-    "Network 1/Netacad/Packet Tracer/Vlan & Inter-VLAN Routing",
-    "Network 1/Oversigt DIV/FILES WITH INFO/modul00 Velkommen til Netværk I + II.pdf",
-    "Network 1/Oversigt DIV/FILES WITH INFO/Slides fra Netacad (PDF)-20260812/Netværk I/SRWE_Module_01-Basic Device Configuration.pdf",
-    "Network 1/Netacad/Packet Tracer/Packet tracer saves/Øvelse.v.1.pkt",
     "H1/Notes/RAID/Chapter 3 MSCA.md",
     "H1/CASE/Untitled.md",
     "README.md",
