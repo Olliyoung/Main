@@ -4,6 +4,8 @@ hostname S1
 enable secret class
 service Password-Encryption
 
+no ip domain-lookup
+
 ip domain-name ccna-ptsa.com
 
 username admin secret admin1pass
