@@ -1,0 +1,96 @@
+configure terminal
+
+vlan 2
+name Bikes
+vlan 3
+name Trikes
+vlan 4
+name Management
+vlan 5
+name Parking
+vlan 6
+name Native
+exit
+
+interface vlan 2
+description Bikes
+no shutdown
+exit
+
+interface vlan 3
+description Trikes
+no shutdown
+exit
+
+interface vlan 4
+description Management
+ip address 10.19.8.98 255.255.255.248
+no shutdown
+exit
+
+interface vlan 5
+description Parking
+no shutdown
+exit
+
+interface vlan 6
+description Native
+no shutdown
+exit
+
+
+ip default-gateway 10.19.8.97
+
+
+interface range FastEthernet0/1 - 2
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk native vlan 6
+switchport trunk allowed vlan 2,3,4,5,6
+channel-group 1 mode active
+duplex full
+speed 100
+no shutdown
+exit
+
+interface Port-channel 1
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk native vlan 6
+switchport trunk allowed vlan 2,3,4,5,6
+no shutdown
+exit
+
+interface FastEthernet0/18
+switchport mode access
+switchport access vlan 3
+switchport port-security
+switchport port-security maximum 3
+switchport port-security violation shutdown
+switchport port-security mac-address sticky
+no shutdown
+exit
+
+interface range FastEthernet0/3 - 17
+description Unused ports
+switchport mode access
+switchport access vlan 5
+shutdown
+exit
+
+interface range FastEthernet0/19 - 24
+description Unused ports
+switchport mode access
+switchport access vlan 5
+shutdown
+exit
+
+interface range GigabitEthernet0/1 - 2
+description Unused ports
+switchport mode access
+switchport access vlan 5
+shutdown
+exit
+
+end
+write

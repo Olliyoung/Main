@@ -7,6 +7,7 @@
 - **Enter global configuration mode** `<conf t>`
 - **Set the switch hostname to S1** `<hostname S1>`
 - **Set the encrypted privileged-mode password** `<enable secret pass>`
+- Set minimum password length `<security passwords min-length 10>`
 
 ## Enable SSH
 
@@ -14,11 +15,19 @@
 - **Generate an RSA key pair for SSH** `<crypto key generate rsa>`
 - **Set the RSA key size to 2048 bits** `<modulus 2048>`
 - **Create the local user `admin` with an encrypted password** `<username admin secret pass>`
+- **Set it to a more secure version of SSH** `<ip ssh version 2>`
 - **Enter VTY line configuration for remote connections** `<line vty 0 15>`
 - **Allow only SSH connections on the VTY lines** `<transport input ssh>`
 - **Use the local username/password database for authentication** `<login local>`
 - **Leave VTY line configuration mode** `<exit>`
 
+Enabling ipv6
+Enable ipv6 on interface `<ipv6 enable>`
+Enable ipv6 globally `<ipv6 unicast-routing>`
+Setting ipv6 address `<ipv6 2001:AAAA:BBBB:CCCC::/64`
+## Loopback interface
+
+**Set up loopback interface** `interface loopback <number>`
 ## Setup management address (SVI)
 
 - **Enter the configuration for VLAN 1's virtual interface** `<interface vlan 1>`
@@ -278,3 +287,106 @@
 
 - **Return to privileged EXEC mode** `<end>`
 - **Save the running configuration to startup configuration** `<wr>`
+
+# BlackHole & Switchport & BPDU
+
+- **Create VLAN 666** `<vlan 666>`
+- **Name VLAN 666 BlackHole** `<name BlackHole>`
+- **Leave VLAN configuration mode** `<exit>`
+
+## Move unused ports to VLAN 666
+
+- **Select the unused ports** `<interface range FastEthernet0/x-y>`
+- **Set the ports to access mode** `<switchport mode access>`
+- **Move the ports to VLAN 666** `<switchport access vlan 666>`
+- **Shut down the unused ports** `<shutdown>`
+- **Leave interface configuration mode** `<exit>`
+
+## Check VLAN 666
+
+- **Display the VLAN database** `<show vlan>`
+
+## BPDU Guard
+
+- **Select the access ports** `<interface range FastEthernet0/x-y>`
+- **Enable BPDU Guard** `<spanning-tree portfast bpduguard enable>`
+- **Leave interface configuration mode** `<exit>`
+
+## Check BPDU Guard
+
+- **Show the configuration of Fa0/18** `<show running-config interface FastEthernet0/18>`
+- **Check interface status** `<show interfaces status>`
+
+## Test BPDU Guard – Sw4 Fa0/10
+
+- **Move Fa0/10 to VLAN 1** `<switchport access vlan 1>`
+- **Enable Fa0/10** `<no shutdown>`
+- **Enable BPDU Guard on Fa0/10** `<spanning-tree portfast bpduguard enable>`
+
+## Check for BPDU Guard shutdown
+
+- **Check interface status** `<show interfaces status>`
+- **Check Fa0/10 status** `<show interfaces FastEthernet0/10>`
+- **Check error-disabled ports** `<show errdisable recovery>`
+
+## Remove BPDU Guard
+
+- **Enter Fa0/10** `<interface FastEthernet0/10>`
+- **Remove BPDU Guard** `<no spanning-tree portfast bpduguard enable>`
+- **Leave interface configuration mode** `<exit>`
+
+## Recover an error-disabled port
+
+- **Enter the affected interface** `<interface FastEthernet0/10>`
+- **Shut the interface down** `<shutdown>`
+- **Bring the interface back up** `<no shutdown>`
+- **Leave interface configuration mode** `<exit>`
+
+## EtherChannel – Sw4 and Sw5
+
+### Sw4 Fa0/1-4
+
+- **Select Fa0/1 through Fa0/4** `<interface range FastEthernet0/1-4>`
+- **Set the ports to trunk mode** `<switchport mode trunk>`
+- **Add the ports to EtherChannel 1 using LACP** `<channel-group 1 mode active>`
+- **Leave interface configuration mode** `<exit>`
+
+### Sw5 Fa0/1-4
+
+- **Select Fa0/1 through Fa0/4** `<interface range FastEthernet0/1-4>`
+- **Set the ports to trunk mode** `<switchport mode trunk>`
+- **Add the ports to EtherChannel 1 using LACP** `<channel-group 1 mode active>`
+- **Leave interface configuration mode** `<exit>`
+
+## Configure Port-Channel 1
+
+- **Enter Port-Channel 1** `<interface Port-channel 1>`
+- **Set Port-Channel 1 to trunk mode** `<switchport mode trunk>`
+- **Leave interface configuration mode** `<exit>`
+
+## Check EtherChannel
+
+- **Display EtherChannel summary** `<show etherchannel summary>`
+- **Display EtherChannel port-channel information** `<show etherchannel port-channel>`
+- **Display trunk information** `<show interfaces trunk>`
+- **Check Port-Channel 1** `<show interfaces Port-channel 1>`
+
+## Find the Root Switch
+
+- **Display Spanning Tree information** `<show spanning-tree>`
+- **Check the Root Bridge for VLAN 1** `<show spanning-tree vlan 1>`
+- **Check the Root Bridge for VLAN 20** `<show spanning-tree vlan 20>`
+- **Check the Root Bridge for VLAN 30** `<show spanning-tree vlan 30>`
+- **Check the Root Bridge for VLAN 40** `<show spanning-tree vlan 40>`
+
+## Encapsulation
+
+- **Configure 802.1Q encapsulation for VLAN 20** `<encapsulation dot1Q 20>`
+- **Configure 802.1Q encapsulation for VLAN 30** `<encapsulation dot1Q 30>`
+- **Configure VLAN 40 as the native VLAN** `<encapsulation dot1Q 40 native>`
+
+## Check Encapsulation
+
+- **Display the configuration of G0/1.20** `<show running-config interface GigabitEthernet0/1.20>`
+- **Display the configuration of G0/1.30** `<show running-config interface GigabitEthernet0/1.30>`
+- **Display the configuration of G0/1.40** `<show running-config interface GigabitEthernet0/1.40>`

@@ -1,0 +1,35 @@
+enable
+configure terminal
+hostname S1
+enable secret class
+service Password-Encryption
+
+ip domain-name ccna-ptsa.com
+
+username admin secret admin1pass
+service Password-Encryption
+
+crypto key generate rsa
+
+ip ssh version 2
+
+line console 0
+password admin1pass
+login local
+exit
+
+line vty 0 15
+transport input ssh
+login local
+exit
+
+banner motd #
+*************************************
+* Unauthorized access is prohibited *
+* This is a private network device  *
+*************************************
+#
+
+end
+
+write memory
