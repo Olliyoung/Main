@@ -1,14 +1,14 @@
 enable
 configure terminal
-hostname S1
-enable secret class
+hostname R2
+enable secret 1337
 service Password-Encryption
 
 no ip domain-lookup
 
-ip domain-name ccna-ptsa.com
+ip domain-name OYL.com
 
-username admin secret admin1pass
+username admin secret 1337
 service Password-Encryption
 
 crypto key generate rsa
@@ -16,7 +16,7 @@ crypto key generate rsa
 ip ssh version 2
 
 line console 0
-password admin1pass
+password 1337
 login local
 exit
 
