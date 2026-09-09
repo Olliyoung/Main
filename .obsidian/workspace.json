@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Service management 1/Bøger/Incident management.md",
+                "file": "Network 2/ACL/Untitled.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Incident management"
+              "title": "Untitled"
             }
           }
         ]
@@ -55,7 +55,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#/tag:#/",
+                "query": "trunk",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -182,27 +182,39 @@
       "llm-hub:Open chat": false
     }
   },
-  "active": "13e1282aabad28ae",
+  "active": "3f56c78c37a5050c",
   "lastOpenFiles": [
-    "Network 1/Netacad/Packet Tracer/Byg Selv/Byg selv opgave 1/PKT/byg selv endelige.pkt~",
+    "Network 2/ACL/PKT/ACL + NAT/opgave nat acl whatever.pkt~",
+    "Network 2/ACL/PKT/ACL + NAT/opgave nat acl whatever.pkt",
+    "Network 2/ACL/PKT/ACL + NAT",
+    "Network 2/ACL/PKT/New Folder",
+    "Network 2/ACL/PKT/4 & 5/5,0.pkt~",
+    "Network 2/ACL/PKT/4 & 5/5,2.pkt~",
+    "Network 2/ACL/PKT/4 & 5/5,1.pkt~",
+    "Network 2/ACL/PKT/4 & 5/5,3.pkt~",
+    "Network 2/ACL/PKT/4 & 5/5,3.pkt",
+    "Network 2/ACL/PKT/4 & 5/5,2.pkt",
+    "Network 2/ACL/PKT/4 & 5/5,1.pkt",
     "Network 1/Commands & stuff.md",
-    "Service management 1/Bøger/Incident management.md",
-    "Service management 1/Bøger",
-    "Network 1/Netacad/Packet Tracer/Byg Selv/Byg selv opgave 1/PKT/byg selv endelige.pkt",
-    "Servertek/router.pdf",
-    "Servertek/Rouet.pdf",
-    "Servertek/VSCODIUM/jump.pdf",
+    "Network 2/ACL/Untitled.md",
+    "Network 1/CCNA_Checkpoint_Notes.md",
+    "Brugbare Ting/Brugbare CMD/Search VM (Mac-ADDR).md",
+    "Service management 1/ITIL Principper.md",
     "Service management 1/Noter.md",
+    "Network 1/Usefull Images/Link Aggregation and EtherChannel/pagp-lacp2.png",
+    "Network 1/Usefull Images/Link Aggregation and EtherChannel/Pagp-Lacp.png",
+    "Network 1/CCNA_Chekcpoint_Notes_2.md",
     "Network 1/Netacad/Packet Tracer/Byg Selv/Byg selv opgave 1/Opgave/Commands C&P.md",
-    "Service management 1",
-    "Network 1/Netacad/Packet Tracer/Byg Selv/Byg selv opgave 1/PKT/Byg-Selv.pkt~",
-    "Network 1/Netacad/Packet Tracer/Final PKT/S2 commands",
-    "Network 1/Netacad/Packet Tracer/Final PKT/R1 Configuration",
-    "Network 1/Commands & stuff 1.md",
-    "Network 1/Netacad/Packet Tracer/Byg Selv/Byg selv opgave 1/Opgave/Byg selv Opgave.md",
-    "Pasted image 20260818162718.png",
     "Network 1/Usefull Images/Link Aggregation and EtherChannel/EPLA Visualization.jpg",
+    "Network 1/Netacad/Packet Tracer/Final Exam/CCNA_SRWE_v7_topologi_PACKET_TRACER.png",
     "Network 1/Usefull Images/Link Aggregation and EtherChannel/Link aggregation explained in short.jpg",
+    "Network 1/Static_Routing_Notes.md",
+    "Network 1/lærings log.md",
+    "Network 1/Notes and whatever.md",
+    "Network 1/Commands & stuff 1.md",
+    "Pasted image 20260818162718.png",
+    "Service management 1/Bøger/Incident management.md",
+    "Network 1/Netacad/Packet Tracer/Byg Selv/Byg selv opgave 1/Opgave/Byg selv Opgave.md",
     "Network 1/Usefull Images/EPLA Visualization.jpg",
     "Network 1/Usefull Images/OSI MODEL/Osi Model.jpg",
     "Network 1/Netacad/Packet Tracer/Vlan & Inter-VLAN Routing/Commands i used.md",
@@ -214,13 +226,9 @@
     "H1/Notes/Opgaver/Uninterrupted Power Supply.md",
     "H1/Notes/Server Administration & Security/Understanding  Security Layers.md",
     "H1/Notes/Case grupper læring/Hvad er vigtigt i en GRUPPE.md",
-    "Network 1/lærings log.md",
     "Pasted image 20251127092737.png",
     "Servertek/Servertek.md",
     "Servertek/screenshots til aflevering/Firewall Internal.png",
-    "Servertek/screenshots til aflevering/Firewall External.png",
-    "Servertek/screenshots til aflevering/dnsmasq.png",
-    "Servertek/screenshots til aflevering/AutomaticUpdates.png",
     "H1/Notes/Databaser/DB - Backup & Restore.md",
     "Untitled.md"
   ]
