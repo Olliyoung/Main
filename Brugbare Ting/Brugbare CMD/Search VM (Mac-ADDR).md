@@ -1,1 +1,0 @@
-`for each in $(sudo virsh list --all --name | tr "\n" " ");\   do echo ":: VM $each"; sudo virsh domiflist $each; done`
