@@ -1,201 +1,208 @@
 ---
-tags: [network-2, cisco, packet-tracer, ipsec, site-to-site, crypto-map, vpn]
-aliases: ["Site-to-site VPN config", "IPsec tunnel config", "crypto map", "VPN-MAP"]
+tags: [network-2, cisco, ipsec, site-to-site, crypto-map, kommandoer, modul8]
+aliases: ["Site-to-site VPN kommandoer", "IPsec kommandoer forklaret", "crypto map"]
 ---
 
-# 08 — Site-to-site IPsec VPN (config)
+# 08 — Site-to-site IPsec VPN: kommandoer forklaret
 
-> [!abstract] What & why
-> Connect two sites' LANs over an untrusted path with an encrypted **tunnel-mode IPsec**
-> tunnel between the two edge routers. Hosts send normal traffic; the gateways do the crypto.
-> Only traffic matching an **"interesting traffic" ACL** goes into the tunnel — everything
-> else passes in clear text. Concepts: [[07 - IPsec framework]].
->
-> Lab: *Packet Tracer — Configure and Verify a Site-to-Site IPsec VPN* (R1 ↔ R3 via R2).
+> Noter til opgaven *Configure and Verify a Site-to-Site IPsec VPN* (R1 ↔ R3 via R2).
+> Her står **hvad hver kommando gør** — konfigurationslinjerne er givet i opgaven i Learn.
+> Koncepter: [[07 - IPsec framework]] · [[06 - VPN types & tunneling]].
 
-## Topology for this lab
+## Rækkefølgen
 
-```
-PC-A ── S1 ── R1 ═══ R2 ═══ R3 ── S3 ── PC-C
-192.168.1.0/24   10.1.1.0/30  10.2.2.0/30   192.168.3.0/24
-```
+1. Slå security-pakken til (ellers virker `crypto`-kommandoerne ikke)
+2. Definér **interessant trafik** (ACL)
+3. **IKE Phase 1** — ISAKMP-policy + nøgle
+4. **IKE Phase 2** — transform-set + crypto map
+5. Sæt crypto map på det udgående interface
+6. Test
 
-| | R1 (site A) | R3 (site B) |
-|---|---|---|
-| LAN to protect | `192.168.1.0/24` (G0/0 = .1) | `192.168.3.0/24` (G0/0 = .1) |
-| Tunnel (outside) interface | **S0/0/0** = `10.1.1.2` | **S0/0/1** = `10.2.2.2` |
-| Peer address (far end) | `10.2.2.2` | `10.1.1.2` |
-| Interesting-traffic ACL 110 | `permit ip 192.168.1.0 → 192.168.3.0` | `permit ip 192.168.3.0 → 192.168.1.0` (mirror) |
+---
 
-> [!note] R2 is a pass-through
-> R2 (`10.1.1.1`, `10.2.2.1`) just routes — **no VPN config**. Routing is already done with
-> OSPF 101, so both routers can reach each other's serial before you start.
-
-## ISAKMP Phase 1 — parameters used
-
-| Parameter | Value | Default? |
-|---|---|---|
-| Key distribution | ISAKMP | — |
-| Encryption | **AES 256** | no → must set |
-| Hash | SHA‑1 | yes |
-| Authentication | **pre‑share** | no → must set |
-| DH group | **5** | no → must set (PT max is 5; prod ≥ 24) |
-| SA lifetime | 86400 s | yes |
-| Pre‑shared key | `vpnpa55` | — |
-
-## IPsec Phase 2 — parameters used
-
-| Parameter | Value |
-|---|---|
-| Transform set name | `VPN-SET` |
-| ESP encryption | `esp-aes` |
-| ESP authentication | `esp-sha-hmac` |
-| Crypto map name | `VPN-MAP`, seq `10`, type `ipsec-isakmp` |
-
-## Prerequisite — enable the security license
+## 1. Security-pakke
 
 ```cisco
-! crypto commands are rejected until the security package is active
-show version                      ! look for securityk9 under current tech packages
-configure terminal
- license boot module c1900 technology-package securityk9
-! accept the EULA, then:
-end
-write memory
-reload                            ! required for the license to take effect
-show version                      ! confirm securityk9 = active
+show version
 ```
-
-## Ready config — R1
+Viser bl.a. hvilke technology packages der er aktive. Du skal se **`securityk9`**.
 
 ```cisco
-enable
-configure terminal
-!
-! --- 1. interesting traffic: R1 LAN -> R3 LAN (implicit deny handles the rest) ---
+license boot module c1900 technology-package securityk9
+```
+Slår security-licensen til på en 1900-router. Uden den bliver **alle `crypto`-kommandoer
+afvist**. Bagefter: accepter EULA, `write`, og `reload` (licensen kræver genstart).
+
+---
+
+## 2. Interessant trafik (ACL)
+
+```cisco
 access-list 110 permit ip 192.168.1.0 0.0.0.255 192.168.3.0 0.0.0.255
-!
-! --- 2. IKE Phase 1 policy (only the non-default bits) ---
+```
+Definerer hvilken trafik der skal **ind i tunnelen** ("interessant trafik").
+
+- `110` = ACL-nummer (udvidet ACL, så vi kan matche både kilde og destination).
+- `permit ip` = det er IP-trafik der skal krypteres (ikke "tillades" i firewall-forstand —
+  her betyder `permit` "kryptér denne trafik").
+- `192.168.1.0 0.0.0.255` = **kilde** (R1's LAN). `0.0.0.255` er wildcard-masken (det
+  omvendte af `255.255.255.0`).
+- `192.168.3.0 0.0.0.255` = **destination** (R3's LAN).
+- Alt andet end det ACL'en matcher, sendes ukrypteret (implicit deny → ingen kryptering).
+- På R3 skal ACL'en være **spejlvendt**: kilde `192.168.3.0`, destination `192.168.1.0`.
+
+---
+
+## 3. IKE Phase 1 — ISAKMP-policy
+
+Phase 1 = de to routere autentificerer hinanden og bygger en sikker kanal til at aftale
+resten.
+
+```cisco
 crypto isakmp policy 10
+```
+Går ind i Phase 1-politik nr. `10`. Nummeret er en **prioritet** — har man flere politikker,
+prøves de laveste numre først, og den lavest-nummererede der matcher modparten vinder.
+Politikken skal matche på begge routere.
+
+```cisco
  encryption aes 256
+```
+Hvilken kryptering der beskytter **selve Phase 1-forhandlingen** (ikke brugertrafikken).
+AES med 256-bit nøgle. (Default er `des` — derfor skal denne linje skrives.)
+
+```cisco
+ hash sha
+```
+Hash/integritets-algoritme til Phase 1 (tjekker at forhandlings-beskederne ikke er ændret).
+`sha` er default, så linjen kan udelades.
+
+```cisco
  authentication pre-share
+```
+Hvordan de to routere beviser hvem de er. `pre-share` = de deler en fælles hemmelig nøgle
+(alternativet er `rsa-sig` med certifikater). Default er `rsa-sig`, så denne skal skrives.
+
+```cisco
  group 5
-exit
-! pre-shared key, pointed at R3's SERIAL (the far tunnel endpoint)
+```
+Diffie-Hellman-gruppe. DH bruges til at **udveksle nøglerne sikkert**. Højere gruppe =
+stærkere, men tungere. Packet Tracer understøtter maks. `5` (i produktion mindst 24).
+Default er `1`, så denne skal skrives.
+
+```cisco
+ lifetime 86400
+```
+Hvor længe Phase 1-forbindelsen (ISAKMP SA) gælder før den skal genforhandles, i sekunder.
+`86400` = 24 timer og er default, så linjen kan udelades.
+
+```cisco
 crypto isakmp key vpnpa55 address 10.2.2.2
-!
-! --- 3. IKE Phase 2 transform set ---
+```
+Den fælles hemmelige nøgle (`vpnpa55`) — **bundet til modpartens IP** (`10.2.2.2` = R3's
+serial-interface, den anden ende af tunnelen). Samme nøgle skal stå på R3, bundet til R1's
+IP (`10.1.1.2`).
+
+---
+
+## 4. IKE Phase 2 — transform-set + crypto map
+
+Phase 2 = de bliver enige om hvordan **den rigtige trafik** beskyttes.
+
+```cisco
 crypto ipsec transform-set VPN-SET esp-aes esp-sha-hmac
-!
-! --- 4. crypto map ties peer + transform set + interesting traffic together ---
+```
+Laver et "transform-set" med et navn (`VPN-SET`) og de algoritmer der beskytter data:
+
+- `esp-aes` = ESP med AES til **kryptering** af data.
+- `esp-sha-hmac` = ESP med SHA-HMAC til **integritet/autentificering** af hver pakke.
+
+```cisco
 crypto map VPN-MAP 10 ipsec-isakmp
+```
+Laver et crypto map — den "samlekasse" der binder Phase 2 sammen.
+
+- `VPN-MAP` = navn. `10` = sekvensnummer (kan have flere entries i samme map).
+- `ipsec-isakmp` = brug IKE/ISAKMP til at forhandle tunnelen automatisk (i stedet for at
+  sætte nøgler manuelt).
+
+```cisco
  description VPN connection to R3
+```
+Bare en tekst-note på map-entryen.
+
+```cisco
  set peer 10.2.2.2
+```
+Hvem den anden ende af tunnelen er — modpartens **offentlige/ydre IP** (`10.2.2.2`). På R3
+peger den på R1 (`10.1.1.2`). **Ikke** R2's adresser.
+
+```cisco
  set transform-set VPN-SET
+```
+Hvilket transform-set (fra ovenfor) der skal bruges til at beskytte trafikken.
+
+```cisco
  match address 110
-exit
-!
-! --- 5. bind the map to the OUTSIDE interface ---
+```
+Hvilken ACL der bestemmer den **interessante trafik** — altså hvad der skal i tunnelen. Peger
+på `access-list 110`.
+
+---
+
+## 5. Sæt crypto map på interfacet
+
+```cisco
 interface s0/0/0
  crypto map VPN-MAP
-exit
-end
-write memory
 ```
+Aktiverer crypto map'et på det **udgående interface** mod internettet/R2. Først her træder
+VPN'en i kraft. På R1 er det `S0/0/0`, på R3 er det `S0/0/1` (interfacet der vender mod R2).
+Du får beskeden `ISAKMP is ON`.
 
-## Ready config — R3 (mirror image)
+---
+
+## 6. Verificering — `show`-kommandoer
 
 ```cisco
-enable
-configure terminal
-!
-! interesting traffic reversed: R3 LAN -> R1 LAN
-access-list 110 permit ip 192.168.3.0 0.0.0.255 192.168.1.0 0.0.0.255
-!
-crypto isakmp policy 10
- encryption aes 256
- authentication pre-share
- group 5
-exit
-crypto isakmp key vpnpa55 address 10.1.1.2
-!
-crypto ipsec transform-set VPN-SET esp-aes esp-sha-hmac
-!
-crypto map VPN-MAP 10 ipsec-isakmp
- description VPN connection to R1
- set peer 10.1.1.2
- set transform-set VPN-SET
- match address 110
-exit
-!
-interface s0/0/1
- crypto map VPN-MAP
-exit
-end
-write memory
+show access-lists 110
 ```
-
-## Verification (Part 3)
+Tjek at ACL'en ser rigtig ud. Match-tælleren er 0 indtil der har været trafik.
 
 ```cisco
-! BEFORE interesting traffic - all counters 0
-R1# show crypto ipsec sa
-    #pkts encaps: 0, #pkts encrypt: 0, #pkts digest: 0
-    #pkts decaps: 0, #pkts decrypt: 0, #pkts verify: 0
-
-! create interesting traffic: from PC-A, ping PC-C (192.168.3.3)
-! (first ping or two may drop while the tunnel negotiates)
-
-! AFTER - encrypt AND decrypt climbing = tunnel works
-R1# show crypto ipsec sa
-    #pkts encaps: 4, #pkts encrypt: 4, #pkts digest: 4
-    #pkts decaps: 4, #pkts decrypt: 4, #pkts verify: 4
-
-! Phase 1 SA - want QM_IDLE / ACTIVE between 10.1.1.2 and 10.2.2.2
-R1# show crypto isakmp sa
-
-! prove only interesting traffic is encrypted:
-! from PC-A ping PC-B (192.168.2.3) - NOT in ACL 110
-! re-run show crypto ipsec sa -> counters DID NOT change
+show crypto isakmp sa
 ```
+Phase 1-status. Vil se én linje mellem de to peers med state **`QM_IDLE`** når Phase 1 er
+oppe.
 
-> [!tip] Good vs bad
-> **Good:** `show crypto isakmp sa` shows one peer, state `QM_IDLE`; `show crypto ipsec sa`
-> has `#pkts encrypt` **and** `#pkts decrypt` both increasing after a PC‑to‑PC ping.
-> **Bad:**
-> - no ISAKMP SA at all → Phase 1 mismatch (encryption / hash / group / auth / key) or no
->   route to the peer's serial
-> - ISAKMP up, `#pkts encrypt` climbing but `#pkts decrypt = 0` → R3's ACL 110 isn't the
->   mirror, or R3's crypto map isn't applied / wrong interface
-> - counters stay 0 even from PC‑A → crypto map not on the interface, or you tested from the
->   router instead of the PC
+```cisco
+show crypto ipsec sa
+```
+Phase 2-status. Kig på tællerne:
 
-## ⚠️ Common mistakes (this lab)
+- `#pkts encaps / encrypt` og `#pkts decaps / decrypt` = **0** før der er sendt interessant
+  trafik.
+- Efter en ping fra PC-A til PC-C: begge tællere **> 0 og stigende** = tunnelen virker.
+- Ping fra PC-A til PC-B (ikke i ACL 110): tællerne **ændrer sig ikke** = kun interessant
+  trafik krypteres.
 
-> [!warning]
-> - **`securityk9` not enabled** → every `crypto …` command silently fails. `show version`
->   must list it; if not, enable the license, `write`, `reload`.
-> - **ACL 110 not mirrored** — R1 is `src 192.168.1.0 dst 192.168.3.0`; R3 is the exact
->   reverse. If they don't mirror, Phase 2 never forms.
-> - **`set peer` pointing at R2** — the peer is the **far router's serial**
->   (R1 → `10.2.2.2`, R3 → `10.1.1.2`), *not* R2's serials (`10.1.1.1` / `10.2.2.1`).
-> - **Crypto map on the wrong interface** — R1 = `S0/0/0`, R3 = `S0/0/1` (the interface
->   facing R2). Not the LAN interface.
-> - **Testing with a router ping** — `ping` from R1 sources `10.1.1.2`, which isn't in
->   `192.168.1.0/24`, so it's not interesting. Ping **from PC‑A to PC‑C**.
-> - **Key mismatch** — both sides `vpnpa55`.
-> - **DH group** — PT only supports up to `group 5`; a real network would use `group 24`+.
+```cisco
+show crypto map
+```
+Viser map'ets peer, transform-set, match-ACL, og hvilket interface det er sat på.
 
-## 🧭 Troubleshooting checklist
+> Ping fra selve routeren tæller ikke som interessant trafik (afsenderen bliver routerens
+> egen serial-IP, ikke `192.168.1.0/24`). Test altid fra **PC-A til PC-C**.
 
-1. Routing first: can R1 `ping 10.2.2.2` (R3's serial)? If not, fix OSPF / interfaces — the
-   VPN can't build over an unreachable peer.
-2. `show version` on both → `securityk9` active?
-3. `show crypto isakmp sa` → Phase 1 up? If not, diff `show run | section crypto isakmp`
-   between R1 and R3 (encryption / hash / group / auth) and check the key + peer address.
-4. `show crypto ipsec sa` → Phase 2 up? encrypt climbing but not decrypt → problem is on the
-   **peer** side (ACL mirror, transform set, crypto map on interface).
-5. `show access-lists 110` on both → exact mirrors?
-6. `show crypto map` → peer, transform-set, `match address 110`, and "Interfaces using
-   crypto map" all present?
-7. Test from **PC‑A → PC‑C**, then confirm PC‑A → PC‑B leaves the counters unchanged.
+---
+
+## Kort: hvad hører til hvilken fase
+
+| Kommando | Fase |
+|---|---|
+| `access-list 110 …` | interessant trafik (bruges af Phase 2) |
+| `crypto isakmp policy` + `encryption` / `hash` / `authentication` / `group` / `lifetime` | **Phase 1** |
+| `crypto isakmp key … address …` | **Phase 1** (autentificering) |
+| `crypto ipsec transform-set …` | **Phase 2** |
+| `crypto map … ipsec-isakmp` + `set peer` / `set transform-set` / `match address` | **Phase 2** |
+| `interface …` + `crypto map` | aktiverer det hele |

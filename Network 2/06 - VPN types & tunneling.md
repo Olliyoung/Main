@@ -1,63 +1,57 @@
 ---
-tags: [network-2, cisco, vpn, tunneling, gre, dmvpn, mpls, ssl, draft]
-aliases: ["VPN types", "VPN concepts", "Tunneling"]
+tags: [network-2, vpn, tunneling, gre, dmvpn, modul8]
+aliases: ["VPN typer", "Tunneling", "GRE", "DMVPN"]
 ---
 
-# 06 — VPN types & tunneling
+# 06 — VPN-typer & tunneling
 
-> [!abstract] What & why
-> A **VPN** carries private traffic across a public/untrusted network by **encrypting** it, so
-> it stays confidential in transit. Benefits: **cost savings** (internet instead of leased
-> lines), **security**, **scalability**, **compatibility**.
->
-> See also: [[07 - IPsec framework]] · [[08 - Site-to-site IPsec VPN (config)]] · [[00 - Overview & topology]]
+> Noter fra **Modul 8 (WAN) — VPN**. Se også [[07 - IPsec framework]] og
+> [[08a - Opgave-gennemgang (site-to-site IPsec VPN)]].
 
-## Two ways to classify a VPN
+## Hvad er en tunnel?
 
-### By who connects — topology
+Den originale pakke bliver **pakket ind i en ny pakke** (ny ydre IP-header mellem de to
+tunnel-endepunkter) og sendt over netværket imellem. Det er forskellen på trafik over et
+almindeligt internet-link og trafik i en tunnel.
 
-| Type | What it connects | Terminating device | Traffic from the host |
-|---|---|---|---|
-| **Site-to-site** | whole network ↔ whole network, across an untrusted network | VPN **gateway** at each site | normal unencrypted TCP/IP; the gateway does the crypto |
-| **Remote-access** | a single mobile/remote user ↔ the enterprise | VPN client ↔ headend (ASA / router / concentrator) | client builds the encrypted tunnel itself; can be **IPsec** or **SSL** |
+## VPN — to typer
 
-### By who runs it — management
+- **Site-to-site VPN** — enhederne bag VPN-routerne/gateways aner intet om VPN-forbindelsen.
+- **Remote-access VPN** — brugerne har en VPN-klient, eller bruger en browser.
 
-| Type | Managed by | Examples |
-|---|---|---|
-| **Enterprise** | the organisation itself | IPsec site-to-site, GRE over IPsec, DMVPN, IPsec VTI, SSL remote access |
-| **Service-provider** | the ISP / carrier | MPLS **L3VPN** and **L2VPN** (customer traffic separated in the provider core) |
+## Enterprise vs Service Provider VPN
 
-## Tunneling technologies
+- **Enterprise VPN** — oprettes og administreres af virksomheden selv, med IPsec og SSL.
+  - Site-to-site: IPsec VPN · GRE over IPsec · DMVPN · IPsec VTI
+  - Remote access: klient-baseret IPsec · clientless SSL
+- **Service Provider VPN** — oprettes og administreres over udbyderens netværk. Udbyderen
+  bruger **MPLS** på Layer 2 eller Layer 3.
+  - Legacy: Frame Relay, ATM
 
-> [!todo] Fill in per technology as we cover it
-> For each: what it does · secure? · scales? · typical use.
+## DMVPN
 
-| Technology | Secure (encrypts)? | Notes | Status |
-|---|---|---|---|
-| **GRE** | ❌ no | generic tunnel; carries multicast/routing protocols that plain IPsec can't; usually wrapped **GRE over IPsec** | todo |
-| **IPsec** | ✅ yes | confidentiality + integrity + authentication; site-to-site and remote access | → [[07 - IPsec framework]] |
-| **GRE over IPsec** | ✅ yes | GRE for the routing/multicast, IPsec for the encryption | todo |
-| **DMVPN** | ✅ yes | hub-and-spoke that builds **dynamic spoke-to-spoke** tunnels on demand; scales to many sites | todo |
-| **IPsec VTI** | ✅ yes | tunnel interface instead of crypto maps; simpler config for many sites / remote access | todo |
-| **SSL / TLS VPN** | ✅ yes | remote access via browser (clientless) or a lightweight client; no IPsec client needed | → [[09 - Remote-access & provider VPNs]] |
-| **MPLS L3VPN / L2VPN** | ❌ (separation, not encryption) | provider keeps customers' routes/frames separate in the core | todo |
+Site-to-site IPsec og GRE over IPsec er fine ved **få sites**. Ved **mange sites** bliver det
+uoverskueligt at konfigurere alle forbindelser manuelt.
 
-## When to use which
+DMVPN (Cisco) opretter **sikre, dynamiske forbindelser mellem mange netværk** (f.eks.
+filialkontorer) uden at hver forbindelse skal konfigureres manuelt.
 
-> [!todo] Decision notes
-> - Need to run OSPF/EIGRP or multicast across the tunnel → GRE (over IPsec).
-> - Many sites, meshy traffic → DMVPN.
-> - Simple config, many tunnels → IPsec VTI.
-> - Roaming users, no client push → SSL VPN.
-> - Just two sites, encrypted → plain site-to-site IPsec ([[08 - Site-to-site IPsec VPN (config)]]).
+> DMVPN = GRE + NHRP + IPsec. NHRP fungerer som en "dynamisk ARP" for tunnel-interfaces — den
+> finder den virkelige IP bag en virtuel tunnel-adresse.
 
-## Common mistakes
+## GRE
 
-> [!warning] To fill in from our session
-> - todo
+En GRE-tunnel er en simpel, fleksibel tunnelprotokol der indkapsler én protokol inde i en
+anden — typisk IP over IP. Den pakker de originale pakker (f.eks. OSPF, multicast, IPv6) ind
+i en ny IP-pakke og sender dem over netværket. **GRE krypterer ikke.**
 
-## Verification
+| Del | Indhold |
+|---|---|
+| Ydre IP-header | IP-adresserne på tunnel-endepunkterne |
+| GRE-header | info om tunnelen og protokollen indeni |
+| Indre pakke | den originale pakke |
 
-> [!tip] To fill in
-> - todo
+Bruges til:
+- routingprotokoller over internettet (OSPF, EIGRP)
+- i DMVPN
+- tunnel hvor IPsec alene ikke kan bruges

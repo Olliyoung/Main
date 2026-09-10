@@ -1,92 +1,63 @@
 ---
-tags: [network-2, cisco, ipsec, ike, esp, ah, diffie-hellman, crypto, draft]
-aliases: ["IPsec", "IKE", "ESP vs AH", "IPsec framework"]
+tags: [network-2, ipsec, ike, isakmp, diffie-hellman, modul8]
+aliases: ["IPsec", "IKE", "ISAKMP", "IPsec framework"]
 ---
 
 # 07 — IPsec framework
 
-> [!abstract] What & why
-> **IPsec** protects and authenticates IP packets between a source and destination. It's a
-> **framework** — you pick an algorithm for each job, and both peers must agree. Works from
-> Layer 4 up to Layer 7 (the whole payload).
->
-> See also: [[06 - VPN types & tunneling]] · [[08 - Site-to-site IPsec VPN (config)]]
+> Noter fra **Modul 8 — VPN**. Se også [[06 - VPN types & tunneling]] og
+> [[08a - Opgave-gennemgang (site-to-site IPsec VPN)]].
 
-## What IPsec provides (the four services)
+## De 4 ting IPsec giver
 
-| Service | Question it answers | Provided by |
-|---|---|---|
-| **Confidentiality** | can anyone read it? | encryption — AES, 3DES, (DES) |
-| **Integrity** | was it changed in transit? | hash / HMAC — SHA, (MD5) |
-| **Origin authentication** | is the peer who it claims to be? | PSK or RSA digital certificates |
-| **Anti-replay / key exchange** | fresh keys, no replayed packets | Diffie-Hellman (DH groups) |
+- **Confidentiality (encryption)** — krypterer data før de sendes over netværket.
+- **Integrity** — tjekker at data ikke er ændret undervejs; opdages pillen, droppes pakken.
+- **Authentication** — tjekker afsenderens identitet, så man taler med den rigtige partner.
+  IPsec bruger **IKE (Internet Key Exchange)** til det.
+- **Anti-Replay Protection** — opdager og afviser gentagne (replayed) pakker; hjælper mod
+  spoofing.
 
-## The IPsec framework — pick one per column
+Huskeregel: **C-I-A** (Confidentiality, Integrity, Authentication).
 
-You choose an algorithm for each job; **both peers must agree** or the tunnel won't form.
+## IPsec Framework — valg pr. trin
 
-| Job | Options | Site-to-site lab choice |
-|---|---|---|
-| Encapsulation | AH · **ESP** | ESP (`esp-aes` + `esp-sha-hmac`) |
-| Confidentiality | DES · 3DES · AES‑128/192/256 | **AES 256** |
-| Integrity | MD5 · **SHA** | SHA‑1 (`esp-sha-hmac`) |
-| Authentication | **PSK** · RSA (certificates) | pre‑share, key `vpnpa55` |
-| DH group | 1/2/5 (avoid) · 14/15/16 (2048/3072/4096‑bit) · 19/20/21/24 (ECC) | **group 5** (Packet Tracer max; prod ≥ 24) |
-| IKE SA lifetime | ≤ 86400 s | 86400 (default) |
+Man vælger én ting i hver række (begge peers skal vælge det samme):
 
-→ Applied config for these is in [[08 - Site-to-site IPsec VPN (config)]].
+| Trin | Muligheder |
+|---|---|
+| IPsec Protocol | AH · ESP · ESP+AH |
+| Confidentiality | DES · 3DES · AES · SEAL |
+| Integrity | MD5 · SHA |
+| Authentication | PSK · RSA |
+| Diffie-Hellman | DH1 · DH2 · DH5 · DH… |
 
-> [!note] Bold = IOS default
-> You only have to type the **non‑default** parameters. For the lab that's encryption,
-> authentication, and DH group in the ISAKMP policy — hash and lifetime are already the
-> defaults.
+> RSA er en **authentication**-protokol, ikke en krypteringsalgoritme.
 
-## AH vs ESP (encapsulation)
+## Symmetrisk vs asymmetrisk kryptering
 
-| | AH (protocol 51) | ESP (protocol 50) |
-|---|---|---|
-| Integrity + authentication | ✅ | ✅ |
-| **Encryption (confidentiality)** | ❌ | ✅ |
-| NAT-friendly | ❌ (breaks with NAT) | ✅ (with NAT-T) |
-| Use in practice | rare | **default choice** |
+- **Symmetrisk** — samme nøgle til at kryptere og dekryptere. Begge enheder skal kende
+  nøglen. Bruges til at kryptere **selve indholdet**. Eksempler: DES og 3DES (ikke længere
+  sikre), **AES** (256-bit anbefales til IPsec).
+- **Asymmetrisk** — forskellige nøgler til kryptering og dekryptering. At kende den ene nøgle
+  gør det ikke muligt at regne den anden ud. Public key-kryptering bruger en privat + en
+  offentlig nøgle. Bruges til **digitale certifikater og nøglehåndtering**.
 
-## Transport mode vs tunnel mode
+## Diffie-Hellman (DH)
 
-> [!todo] Add the packet diagrams from the module video
-> - **Transport mode** — original IP header kept; only the payload is protected. Host-to-host.
-> - **Tunnel mode** — the **entire original packet** is encrypted and wrapped in a new IP
->   header. Gateway-to-gateway (site-to-site). This is the usual site-to-site mode.
+- DH er **ikke** en krypteringsmekanisme og bruges ikke til at kryptere data.
+- DH er en metode til **sikkert at udveksle de nøgler**, der bruges til at kryptere data.
+- DH er en del af IPsec-standarden.
+- AES (samt MD5 og SHA-1) kræver en symmetrisk, delt hemmelig nøgle. RSA bruger forskellige
+  nøgler (asymmetrisk).
 
-## IKE — how the tunnel is negotiated
+## Sådan startes en tunnel — trin for trin
 
-> [!todo] Expand phase 1 / phase 2
-> - **IKE Phase 1 (ISAKMP SA)** — authenticate the peers, run Diffie-Hellman, build a secure
->   management channel. Main mode / aggressive mode (IKEv1) or IKEv2.
-> - **IKE Phase 2 (IPsec SA)** — negotiate the actual data-protection parameters (transform
->   set), one SA per direction. Optionally a fresh DH exchange (PFS).
+1. Vi forudsætter at trafikken skal sendes via VPN.
+2. **IKE Phase 1** — authentication af de to ender + åbn en sikker forbindelse til at udveksle
+   nøgleoplysninger.
+3. **IKE Phase 2** — bliv enige om IPsec SA'erne.
+4. Tunnelen oprettes, og data kan sendes igennem.
 
-### Diffie-Hellman groups
-
-- DH groups **1, 2, 5** — legacy, **do not use**.
-- DH groups **14, 15, 16** — 2048 / 3072 / 4096-bit keys.
-- DH groups **19, 20, 21, 24** — Elliptic Curve (ECC); smaller keys, faster.
-
-### Peer authentication
-
-- **PSK (pre-shared key)** — same secret typed into each peer. Easy, doesn't scale, must be
-  on every peer.
-- **RSA / digital certificates** — each peer authenticates the other with a certificate.
-  Scales; needs a PKI.
-
-## Common mistakes
-
-> [!warning] To fill in from our session
-> - todo (mismatched transform sets, DH group, PSK, lifetimes; interesting-traffic ACLs not
->   mirrored; NAT in the path without NAT-T…)
-
-## Verification
-
-> [!tip] To fill in
-> - `show crypto isakmp sa` — Phase 1 state (want `QM_IDLE` / `ACTIVE`)
-> - `show crypto ipsec sa` — Phase 2; watch `pkts encrypt` / `pkts decrypt` climb
-> - todo
+> **IKE** = Internet Key Exchange. **SA** = Security Association.
+> **ISAKMP** = protokol til at oprette Security Associations og kryptonøgler.
+> `crypto isakmp policy` = Phase 1-politikken.
