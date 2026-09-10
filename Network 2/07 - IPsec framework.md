@@ -23,14 +23,23 @@ aliases: ["IPsec", "IKE", "ESP vs AH", "IPsec framework"]
 
 ## The IPsec framework — pick one per column
 
-> [!todo] Fill in the choices we use in the lab
-> | Job | Options | Our choice |
-> |---|---|---|
-> | Encapsulation | AH · ESP | todo |
-> | Confidentiality | DES · 3DES · AES-128/192/256 | todo |
-> | Integrity | MD5 · SHA | todo |
-> | Authentication | PSK · RSA (certificates) | todo |
-> | DH group | 1/2/5 (avoid) · 14/15/16 (2048/3072/4096-bit) · 19/20/21/24 (ECC) | todo |
+You choose an algorithm for each job; **both peers must agree** or the tunnel won't form.
+
+| Job | Options | Site-to-site lab choice |
+|---|---|---|
+| Encapsulation | AH · **ESP** | ESP (`esp-aes` + `esp-sha-hmac`) |
+| Confidentiality | DES · 3DES · AES‑128/192/256 | **AES 256** |
+| Integrity | MD5 · **SHA** | SHA‑1 (`esp-sha-hmac`) |
+| Authentication | **PSK** · RSA (certificates) | pre‑share, key `vpnpa55` |
+| DH group | 1/2/5 (avoid) · 14/15/16 (2048/3072/4096‑bit) · 19/20/21/24 (ECC) | **group 5** (Packet Tracer max; prod ≥ 24) |
+| IKE SA lifetime | ≤ 86400 s | 86400 (default) |
+
+→ Applied config for these is in [[08 - Site-to-site IPsec VPN (config)]].
+
+> [!note] Bold = IOS default
+> You only have to type the **non‑default** parameters. For the lab that's encryption,
+> authentication, and DH group in the ISAKMP policy — hash and lifetime are already the
+> defaults.
 
 ## AH vs ESP (encapsulation)
 
