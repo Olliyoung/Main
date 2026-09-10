@@ -2,7 +2,7 @@
 tags: [network-2, cisco, cdp, lldp, ntp, discovery, kommandoer, opgave]
 aliases: ["CDP LLDP NTP", "Configure CDP, LLDP, and NTP", "Discovery protocols"]
 ---
-
+ 
 # 09 — CDP, LLDP & NTP: kommandoer forklaret (pr. step)
 
 > Følger opgavens opbygning: **Del 0 (find IP'er)**, **Del 1 (LLDP på HQ-siden)**,
@@ -18,6 +18,7 @@ aliases: ["CDP LLDP NTP", "Configure CDP, LLDP, and NTP", "Discovery protocols"]
 - [[#Del 2 — CDP på Branch-siden]] · Step 1 · 2 · 3
 - [[#Del 3 — NTP på HQ]] · Step 1
 - [[#Verificering]] · [[#Hvis noget ikke virker]]
+- [[#⚠️ Fejl vi ramte i denne lab]] · [[#Alle kommandoer vi brugte]]
 
 ---
 
@@ -249,3 +250,126 @@ Forventet efter opgaven:
 | CDP stadig på en access-port | `no cdp enable` sættes **pr. interface**; `no cdp run` er global og en anden ting |
 | NTP synkroniserer ikke | rigtig server-IP? rute til `192.168.1.254`? giv det tid + Fast Forward; `show ntp associations` |
 | Ved ikke hvilke porte der er "i brug" | `show interfaces status` → `connected` |
+
+---
+
+## ⚠️ Fejl vi ramte i denne lab
+
+> [!warning]
+> - **Router-interface-navne på en switch.** `interface GigabitEthernet0/0/0` / `0/0/1` er
+>   *routerens* porte og findes ikke på en switch → `% Invalid input`. På switchene hedder
+>   portene fx `FastEthernet0/1` eller `GigabitEthernet0/1`. Bemærk: `no cdp run` og
+>   `lldp run` gik igennem og **skal beholdes** — det er kun interface-linjerne der fejlede.
+> - **Antog at HQ-SW-2's porte matcher HQ-SW-1's.** Det gør de ikke nødvendigvis — tjek
+>   `show interfaces status` og `show lldp neighbors` på **hver switch for sig**.
+> - **`no cdp run` "hang ikke ved".** Den virker kun fra `(config)#` — ikke fra
+>   `(config-if)#` eller almindelig `#`. Var du i interface-mode → `exit` først. Bagefter
+>   `show cdp` = "CDP is not enabled".
+> - **Pladsholdere kopieret bogstaveligt.** `<porten mod HQ>` skal erstattes med det rigtige
+>   portnavn før du trykker enter.
+> - **Glemte at gemme.** `write memory` så config'en overlever en reload.
+
+---
+
+## Alle kommandoer vi brugte
+
+### Discovery (kør FØR du slår protokoller fra)
+
+```cisco
+show cdp neighbors
+show cdp neighbors detail      ! Device ID + IP + lokal/remote port
+show lldp neighbors
+show lldp neighbors detail
+show interfaces status         ! "connected" = porten er i brug
+show cdp interface             ! hvilke porte kører CDP
+show lldp interface            ! Tx/Rx pr. port
+```
+
+### HQ (router) — LLDP-siden
+
+```cisco
+enable
+configure terminal
+no cdp run
+lldp run
+interface <link mod HQ-SW-1>
+ lldp receive
+ no lldp transmit
+exit
+interface <link mod HQ-SW-2>
+ lldp receive
+ no lldp transmit
+exit
+end
+write memory
+```
+
+### HQ-SW-1 og HQ-SW-2 (SSH ind — samme på begge)
+
+```cisco
+enable
+configure terminal
+no cdp run
+lldp run
+interface <port mod HQ-routeren>
+ lldp transmit
+ no lldp receive
+exit
+interface range <brugte access-porte>
+ no lldp transmit
+ no lldp receive
+exit
+end
+write memory
+```
+
+### Branch (router) — CDP-siden
+
+```cisco
+enable
+configure terminal
+cdp run
+end
+show cdp neighbors detail      ! find BR-SW-1/2/3's IP-adresser
+ssh -l admin <BR-SW-ip>        ! login: SWxadmin#  /  enable: SWxEnaAccess#
+```
+
+### BR-SW2 og BR-SW3 (SSH ind)
+
+```cisco
+enable
+show interfaces status
+show cdp interface
+configure terminal
+interface range <brugte access-porte>
+ no cdp enable
+exit
+end
+write memory
+```
+
+### HQ — NTP
+
+```cisco
+enable
+configure terminal
+ntp server 192.168.1.254
+end
+```
+
+### Tjek til sidst (efter 100 %)
+
+```cisco
+! HQ
+show lldp neighbors
+show ntp status               ! "Clock is synchronized", stratum, reference 192.168.1.254
+show ntp associations         ! kilden markeret med *
+show clock
+! HQ-SW-1 / HQ-SW-2
+show cdp                      ! "CDP is not enabled"
+show lldp interface           ! link mod HQ: Tx on / Rx off ; access-porte: begge off
+! Branch
+show cdp neighbors detail
+! BR-SW2 / BR-SW3
+show cdp interface            ! de brugte access-porte skal IKKE stå på listen
+```
