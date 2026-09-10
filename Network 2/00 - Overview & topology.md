@@ -26,6 +26,7 @@ aliases: ["Network 2 Overview", "ACL NAT HSRP OSPF", "Subject or the assignment"
 | 07 | [[07 - IPsec framework]] | Modul 8: de 4 IPsec-ydelser, framework-valg, symmetrisk/asymmetrisk, DH, IKE-faserne |
 | 08 | [[08 - Site-to-site IPsec VPN (config)]] | **Kommandoerne til opgaven forklaret** linje for linje |
 | 09 | [[09 - CDP, LLDP & NTP]] | **Opgave:** discovery-protokoller (CDP/LLDP send/receive) + NTP-server, pr. step |
+| 10 | [[10 - Byg netvaerket (VLAN, RoaS, static, DHCP, OSPF, NAT)]] | **Opgave:** hele build'et — VLAN → RoaS → static → DHCP → OSPF → NAT, pr. step |
 
 ---
 
