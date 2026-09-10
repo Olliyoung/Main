@@ -144,12 +144,12 @@ crypto map VPN-MAP 10 ipsec-isakmp
  exit
 ```
 - `crypto map VPN-MAP 10 ipsec-isakmp` — "samlekassen" der binder Phase 2 sammen.
-  `10` = sekvensnummer. `ipsec-isakmp` = brug IKE til at forhandle tunnelen automatisk.
+  `10` = sekvensnummer. `ipsec-isakmp` = brug IKE til at forhandle tunnelen automatisk. | Laver et crypto map navngivet VPN-MAP, med sekvens nummeret 10.
 - `description …` — bare en note.
 - `set peer 10.2.2.2` — hvem den anden ende er: **modpartens ydre IP** (ikke R2).
 - `set transform-set VPN-SET` — hvilket transform-set (fra a) der skal bruges.
 - `match address 110` — hvilken ACL der definerer den interessante trafik → `access-list 110`.
-
+ 
 ### Step 6 — Sæt crypto map på det udgående interface
 
 ```cisco
@@ -275,9 +275,20 @@ Skal give **100 %**. Klik *Check Results* for at se hvad der mangler.
 
 ## Hvis noget ikke virker
 
-| Symptom | Tjek |
+> [!important] Begge routere skal være konfigureret
+> IPsec kræver **symmetrisk opsætning**. R3 alene gør ingenting — R1 skal have den
+> spejlvendte config (peer = `10.2.2.2`, ACL 110 kilde `192.168.1.0` → dest `192.168.3.0`,
+> crypto map på `S0/0/0`) før tunnelen kan komme op.
+
+| Symptom | Betyder / tjek |
 |---|---|
 | `crypto`-kommandoer afvises | `securityk9` ikke slået til / router ikke genstartet |
-| Ingen linje i `show crypto isakmp sa` | Phase 1 matcher ikke (encryption / auth / group / nøgle / peer-IP), eller R1 kan ikke nå `10.2.2.2` |
-| `encrypt` stiger, `decrypt` = 0 | fejl på **R3**: ACL 110 ikke spejlvendt, transform-set, eller crypto map ikke på interfacet |
-| Tællere rører sig ikke selv fra PC-A | crypto map ikke sat på interfacet, eller sat på det forkerte |
+| `show crypto isakmp sa` viser **`MM_NO_STATE`** (evt. `ACTIVE (deleted)`) | Phase 1 kom kun til første besked — **den anden router svarer ikke**: R1 er ikke konfigureret endnu, eller R1↔R3 kan ikke nå hinandens WAN-IP i forvejen |
+| Ingen linje overhovedet i `show crypto isakmp sa` | ingen interessant trafik har trigget tunnelen endnu (ping fra **PC**, ikke fra routeren), eller Phase 1-parametre matcher ikke |
+| `#pkts encrypt` stiger, `#pkts decrypt` = 0 | fejl på **modparten**: ACL 110 ikke spejlvendt, transform-set matcher ikke, eller crypto map ikke på interfacet |
+| Tællerne rører sig slet ikke, selv fra PC-A | crypto map ikke sat på interfacet, eller sat på det forkerte interface |
+
+> [!tip] Tjek grund-connectivity først
+> Fra R3: `ping 10.1.1.2` (R1's WAN-IP). Fejler den → routing/OSPF mellem R1 og R3 virker
+> ikke, og VPN'en kan aldrig komme op. Trig så tunnelen med **ping fra PC-C til PC-A** (ikke
+> fra routerens CLI — så bliver kilde-IP'en routerens egen serial og matcher ikke ACL 110).
