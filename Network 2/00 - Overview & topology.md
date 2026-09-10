@@ -22,6 +22,10 @@ aliases: ["Network 2 Overview", "ACL NAT HSRP OSPF", "Subject or the assignment"
 | 03 | [[03 - OSPF]] | Single-area OSPFv2 between R1–R4 |
 | 04 | [[04 - NAT and PAT]] | Internet access / overload on R1 + R4 |
 | 05 | [[05 - ACL]] | Traffic filtering, NAT selection lists, VTY lockdown |
+| 06 | [[06 - VPN types & tunneling]] | VPN taxonomy + tunneling tech (GRE, DMVPN, VTI, SSL, MPLS) — *draft* |
+| 07 | [[07 - IPsec framework]] | IPsec services, AH/ESP, modes, IKE, DH groups — *draft* |
+| 08 | [[08 - Site-to-site IPsec VPN (config)]] | IOS crypto-map tunnel config skeleton — *draft* |
+| 09 | [[09 - Remote-access & provider VPNs]] | SSL/AnyConnect remote access, MPLS L3/L2VPN — *draft* |
 
 ---
 
