@@ -13,15 +13,44 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Network 2/ACL/Untitled.md",
+                "file": "Network 2/09 - CDP, LLDP & NTP.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Untitled"
+              "title": "09 - CDP, LLDP & NTP"
+            }
+          },
+          {
+            "id": "0d48e51f34e8911c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Network 2/10 - Byg netvaerket (VLAN, RoaS, static, DHCP, OSPF, NAT).md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "10 - Byg netvaerket (VLAN, RoaS, static, DHCP, OSPF, NAT)"
+            }
+          },
+          {
+            "id": "efc511bcff627598",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Network 2/11 - Network Design.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "11 - Network Design"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -55,7 +84,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "trunk",
+                "query": "loopbac",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -182,54 +211,54 @@
       "llm-hub:Open chat": false
     }
   },
-  "active": "3f56c78c37a5050c",
+  "active": "efc511bcff627598",
   "lastOpenFiles": [
-    "Network 2/ACL/PKT/ACL + NAT/opgave nat acl whatever.pkt~",
-    "Network 2/ACL/PKT/ACL + NAT/opgave nat acl whatever.pkt",
-    "Network 2/ACL/PKT/ACL + NAT",
-    "Network 2/ACL/PKT/New Folder",
-    "Network 2/ACL/PKT/4 & 5/5,0.pkt~",
-    "Network 2/ACL/PKT/4 & 5/5,2.pkt~",
-    "Network 2/ACL/PKT/4 & 5/5,1.pkt~",
-    "Network 2/ACL/PKT/4 & 5/5,3.pkt~",
-    "Network 2/ACL/PKT/4 & 5/5,3.pkt",
-    "Network 2/ACL/PKT/4 & 5/5,2.pkt",
-    "Network 2/ACL/PKT/4 & 5/5,1.pkt",
-    "Network 1/Commands & stuff.md",
-    "Network 2/ACL/Untitled.md",
-    "Network 1/CCNA_Checkpoint_Notes.md",
-    "Brugbare Ting/Brugbare CMD/Search VM (Mac-ADDR).md",
-    "Service management 1/ITIL Principper.md",
-    "Service management 1/Noter.md",
+    "Network 2/00 - Overview & topology.md.tmp.18168.f1190edecc7e",
+    "Network 2/12 - Network Troubleshooting.md",
+    "Network 2/12 - Network Troubleshooting.md.tmp.18168.fffac7385814",
+    "Network 2/02 - HSRP.md",
+    "Network 2/11 - Network Design.md",
+    "Network 2/11 - Network Design.md.tmp.18168.330be3aa8d9e",
+    "Network 2/10 - Byg netvaerket (VLAN, RoaS, static, DHCP, OSPF, NAT).md",
+    "Network 2/10 - Byg netvaerket (VLAN, RoaS, static, DHCP, OSPF, NAT).md.tmp.18168.866c8d772e18",
+    "Network 2/Opgaver (PKT)/PKT/Repetition/5,0.pkt",
+    "Network 2/Opgaver (PKT)/PKT/Repetition/4,0.pkt~",
+    "Network 2/Opgaver (PKT)/PKT/Repetition/4,0.pkt",
+    "Network 2/Opgaver (PKT)/PKT/Repetition/3,0.pkt~",
+    "Network 2/Opgaver (PKT)/PKT/Repetition/3,0.pkt",
+    "Network 2/Opgaver (PKT)/PKT/Repetition/2,0.pkt~",
+    "Network 2/Opgaver (PKT)/PKT/Repetition/2,0.pkt",
+    "Network 2/09 - CDP, LLDP & NTP.md",
+    "edit cmds.md",
+    "Network 1/Cisco commands/05 - Static routing & management.md",
+    "Network 2/08 - Site-to-site IPsec VPN (config).md",
+    "Network 2/07 - IPsec framework.md",
+    "Network 2/08a - Opgave-gennemgang (site-to-site IPsec VPN).md",
+    "Network 2/09 - Remote-access & provider VPNs.md",
+    "Network 2/06 - VPN types & tunneling.md",
+    "Brugbare Ting/Brugbare CMD/Windows installation - nyttige kommandoer.md",
+    "Brugbare Ting/Brugbare CMD/Find VM ud fra MAC-adresse.md",
+    "Servertek/screenshots til aflevering 2/hostname.png",
+    "Servertek/screenshots til aflevering 2/firewall.png",
+    "Network 2/05 - ACL.md",
+    "Network 2/00 - Overview & topology.md",
+    "Network 2/01 - Layer 2 foundation.md",
+    "Service management 1/ITSM grundbegreber.md",
+    "Service management 1/ITILs 7 vejledende principper.md",
+    "Network 1/Kursusmål og grundviden.md",
+    "Network 1/Netacad/assets/Pasted image 20260818162718.png",
+    "Network 1/Cisco commands/03 - Inter-VLAN routing & DHCP.md",
+    "Network 1/Cisco commands/02 - Switching.md",
+    "Network 1/Cisco commands/01 - Device setup & SSH.md",
+    "Network 1/Cisco commands/00 - Cheat sheet.md",
+    "Network 1/CCNA theory/03 - LAN security.md",
+    "H1/Notes/Server Administration & Security/assets/Pasted image 20251127092737.png",
     "Network 1/Usefull Images/Link Aggregation and EtherChannel/pagp-lacp2.png",
     "Network 1/Usefull Images/Link Aggregation and EtherChannel/Pagp-Lacp.png",
-    "Network 1/CCNA_Chekcpoint_Notes_2.md",
-    "Network 1/Netacad/Packet Tracer/Byg Selv/Byg selv opgave 1/Opgave/Commands C&P.md",
     "Network 1/Usefull Images/Link Aggregation and EtherChannel/EPLA Visualization.jpg",
     "Network 1/Netacad/Packet Tracer/Final Exam/CCNA_SRWE_v7_topologi_PACKET_TRACER.png",
     "Network 1/Usefull Images/Link Aggregation and EtherChannel/Link aggregation explained in short.jpg",
-    "Network 1/Static_Routing_Notes.md",
-    "Network 1/lærings log.md",
-    "Network 1/Notes and whatever.md",
-    "Network 1/Commands & stuff 1.md",
     "Pasted image 20260818162718.png",
-    "Service management 1/Bøger/Incident management.md",
-    "Network 1/Netacad/Packet Tracer/Byg Selv/Byg selv opgave 1/Opgave/Byg selv Opgave.md",
-    "Network 1/Usefull Images/EPLA Visualization.jpg",
-    "Network 1/Usefull Images/OSI MODEL/Osi Model.jpg",
-    "Network 1/Netacad/Packet Tracer/Vlan & Inter-VLAN Routing/Commands i used.md",
-    "Network 1/Oversigt DIV/Network.md",
-    "H1/Notes/RAID/Chapter 3 MSCA.md",
-    "H1/CASE/Untitled.md",
-    "README.md",
-    "Untitled.canvas",
-    "H1/Notes/Opgaver/Uninterrupted Power Supply.md",
-    "H1/Notes/Server Administration & Security/Understanding  Security Layers.md",
-    "H1/Notes/Case grupper læring/Hvad er vigtigt i en GRUPPE.md",
-    "Pasted image 20251127092737.png",
-    "Servertek/Servertek.md",
-    "Servertek/screenshots til aflevering/Firewall Internal.png",
-    "H1/Notes/Databaser/DB - Backup & Restore.md",
-    "Untitled.md"
+    "Untitled.canvas"
   ]
 }
