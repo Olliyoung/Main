@@ -29,6 +29,7 @@ aliases: ["Network 2 Overview", "ACL NAT HSRP OSPF", "Subject or the assignment"
 | 10 | [[10 - Byg netvaerket (VLAN, RoaS, static, DHCP, OSPF, NAT)]] | **Opgave:** hele build'et — VLAN → RoaS → static → DHCP → OSPF → NAT, pr. step |
 | 11 | [[11 - Network Design]] | Hierarchical (access/distribution/core) + scalable network design theory |
 | 12 | [[12 - Network Troubleshooting]] | Documentation, 7-step process, OSI-layer symptoms/causes, full end-to-end connectivity walkthrough |
+| 13 | [[13 - Netvaerksforstaaelse (hvorfor virker det saadan)]] | **Hvorfor-laget**: ACL vs firewall, STP-valg, EtherChannel, HSRP, DHCP-relay, OSPF, NAT-terminologi, akronym-ordliste |
 
 ---
 
