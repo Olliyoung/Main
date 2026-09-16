@@ -772,6 +772,45 @@ oversætter dem til en offentlig adresse på vejen ud, og tilbage igen på vejen
 **NAT** = én-til-én oversættelse. **PAT** = mange-til-én ved hjælp af portnumre — i
 Cisco-syntaks hedder det `overload`. Det er PAT du næsten altid vil have.
 
+### De tre typer NAT — og hvornår du bruger hvilken
+
+Cisco skelner reelt mellem tre varianter. De løser hver deres problem, og det er
+værd at kunne skelne dem fra hinanden — ikke kun kunne PAT-kommandoen udenad.
+
+| | Static NAT | Dynamic NAT | PAT (NAT overload) |
+|---|---|---|---|
+| Forhold | Én-til-én, **fast** | Én-til-én, **midlertidig** | Mange-til-én |
+| Offentlige IP'er nødvendige | Én pr. oversat enhed | Én pr. **samtidig** bruger | Én, total |
+| Hvem vælger adressen | Du, manuelt | Routeren, fra en pool | Routeren, via portnummer |
+| Typisk brug | En server der skal kunne **nås udefra** (webserver, mailserver) | Sjældent brugt i dag — praktisk kun hvis du har næsten lige så mange offentlige som interne adresser | Alt andet — hele kontorets internetadgang gennem én WAN-IP |
+| Holder ved genstart | Ja — det er en fast linje i configen | Nej — oversættelsen findes kun så længe den er aktiv | Nej — samme som dynamic |
+
+**Static NAT** — én bestemt intern IP mappes permanent til én bestemt offentlig IP.
+Det er den eneste af de tre der lader nogen **udefra** starte en forbindelse ind til
+en intern enhed, fordi mappingen altid findes, uanset om der lige nu er trafik:
+
+```
+ip nat inside source static 192.168.1.10 203.0.113.10
+```
+
+**Dynamic NAT** — en pulje af offentlige adresser deles ud efter først-til-mølle,
+stadig én-til-én. Bruges næsten aldrig i praksis mere (PAT løser samme problem med
+langt færre offentlige adresser), men dukker op til eksamen:
+
+```
+ip nat pool OFFENTLIGE-IPS 203.0.113.10 203.0.113.20 netmask 255.255.255.0
+ip access-list standard NAT-INSIDE
+ permit 192.168.20.0 0.0.0.255
+exit
+ip nat inside source list NAT-INSIDE pool OFFENTLIGE-IPS
+```
+
+Bemærk: ingen `overload` her. Er alle adresser i puljen i brug, får den næste klient
+**ingen** oversættelse, og trafikken dør — det er derfor dynamic NAT kræver næsten lige
+så mange offentlige adresser som samtidige brugere.
+
+**PAT / overload** — det du faktisk bruger i praksis, se `Konfiguration` nedenfor.
+
 > [!info] De fire adressebegreber i `show ip nat translations`
 > Cisco bruger fire faste termer for kolonnerne i oversættelsestabellen:
 >
@@ -784,9 +823,12 @@ Cisco-syntaks hedder det `overload`. Det er PAT du næsten altid vil have.
 >
 > Ved PAT er "inside global" den samme delte offentlige IP for alle — det er portnummeret
 > (typisk fra det ledige interval **1024–65535**) der gør hver oversættelse unik, og som
-> gør at tusindvis af interne klienter kan dele én enkelt offentlig adresse.
+> gør at tusindvis af interne klienter kan dele én enkelt offentlig adresse. Ved static
+> og dynamic NAT er inside global derimod en **anden IP** pr. klient — der er intet
+> portnummer med i regnestykket, fordi der ikke er brug for det til at holde styr på
+> hvem der er hvem.
 
-### Konfiguration
+### Konfiguration (PAT — den du næsten altid vil bruge)
 
 ```
 interface GigabitEthernet0/1
@@ -806,7 +848,18 @@ ip nat inside source list NAT-INSIDE interface GigabitEthernet0/1 overload
 
 `inside` og `outside` fortæller routeren hvilken retning oversættelsen går.
 `interface ... overload` bruger interfacets egen adresse — praktisk hvis den kommer fra
-DHCP hos udbyderen.
+DHCP hos udbyderen. (Alternativet er `ip nat inside source list NAT-INSIDE pool
+NAVN overload` — samme idé, men med én fast pool-adresse i stedet for interfacets egen.)
+
+> [!info] Hvordan PAT holder styr på tusind klienter på én IP
+> Hver oversættelse i tabellen er ikke bare "IP → IP", men en fuld nøgle af
+> **protokol + kilde-IP + kilde-port + destinations-IP + destinations-port**. Det er
+> derfor to forskellige interne klienter godt kan dele samme offentlige port-nummer,
+> så længe de taler med forskellige destinationer — og det er derfor tabellen kan blive
+> tom og fyldes op igen dynamisk: en oversættelse **udløber** efter en periode uden
+> trafik (routeren rydder selv gamle poster), den er ikke permanent som ved static NAT.
+> **ICMP (ping) har ingen portnumre** — der bruger PAT i stedet pakkens
+> query-ID-felt til at holde styr på hvem der spurgte, samme princip, andet felt.
 
 ### ACL'en som adgangskontrol
 
