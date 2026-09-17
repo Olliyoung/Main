@@ -1,0 +1,87 @@
+conf t
+
+configure terminal
+interface GigabitEthernet0/0
+ip address 10.0.12.1 255.255.255.252
+no shutdown
+
+interface GigabitEthernet0/2
+ip address 10.0.13.1 255.255.255.252
+no shutdown
+
+interface Loopback0
+ip address 1.1.1.1 255.255.255.255
+
+ip route 2.2.2.2 255.255.255.255 10.0.12.2
+ip route 3.3.3.3 255.255.255.255 10.0.13.2
+ip route 203.0.113.0 255.255.255.0 10.0.13.2
+
+end
+write memory
+
+_____________________________
+
+configure terminal
+interface GigabitEthernet0/0
+ip address 10.0.12.2 255.255.255.252
+no shutdown
+
+interface Loopback0
+ip address 2.2.2.2 255.255.255.255
+
+ip route 0.0.0.0 0.0.0.0 10.0.12.1
+end
+write memory
+
+_____________________________
+
+configure terminal
+interface GigabitEthernet0/2
+ip address 10.0.13.2 255.255.255.252
+no shutdown
+
+interface GigabitEthernet0/1
+ip address 203.0.113.1 255.255.255.0
+no shutdown
+
+interface Loopback0
+ip address 3.3.3.3 255.255.255.255
+
+ip route 192.168.0.0 255.255.0.0 10.0.13.1
+ip route 2.2.2.2 255.255.255.255 10.0.13.1
+end
+write memory
+____________________
+#R1
+configure terminal
+ip route 2.2.2.2 255.255.255.255 10.0.12.2
+ip route 3.3.3.3 255.255.255.255 10.0.13.2
+ip route 203.0.113.0 255.255.255.0 10.0.13.2
+end
+write memory
+
+#R2
+configure terminal
+ip route 0.0.0.0 0.0.0.0 10.0.12.1
+end
+write memory
+
+#R3
+configure terminal
+ip route 192.168.0.0 255.255.0.0 10.0.13.1
+ip route 2.2.2.2 255.255.255.255 10.0.13.1
+end
+write memory
+
+
+________________________
+
+interface range FastEthernet0/1-6
+switchport mode access
+switchport port-security
+switchport port-security maximum 2
+switchport port-security violation restrict
+switchport port-security mac-address sticky
+no shutdown
+exit
+do wr

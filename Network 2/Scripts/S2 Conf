@@ -1,0 +1,152 @@
+configure terminal
+
+hostname S2
+enable secret 1337
+service Password-Encryption
+
+no ip domain-lookup
+
+ip domain-name OYL.com
+
+username admin secret 1337
+service Password-Encryption
+
+crypto key generate rsa
+
+ip ssh version 2
+
+line console 0
+password 1337
+login local
+exit
+
+line vty 0 15
+transport input ssh
+login local
+exit
+
+banner motd #
+*************************************
+* Unauthorized access is prohibited *
+* This is a private network device  *
+*************************************
+#
+
+interface FastEthernet0/1-2
+duplex full
+speed 100
+
+vlan 10
+name vlan-10
+vlan 20
+name vlan-20
+vlan 30
+name vlan-30
+vlan 99
+name vlan-99-native
+vlan 666
+name vlan-666-blackhole
+exit
+
+interface vlan 10
+description vlan-10
+no shutdown
+exit
+
+interface vlan 20
+description vlan-20
+no shutdown
+exit
+
+interface vlan 30
+description vlan-30
+no shutdown
+exit
+
+interface GigabitEthernet0/1
+encapsulation dot1Q 99
+encapsulation dot1Q 99 native
+description vlan-99-native
+no shutdown
+exit
+
+interface vlan 666
+description vlan-666-blackhole
+no shutdown
+exit
+
+interface range FastEthernet0/3-19
+description Unused ports
+switchport mode access
+switchport access vlan 666
+shutdown
+exit
+
+interface range FastEthernet0/22-23
+description Unused ports
+switchport mode access
+switchport access vlan 666
+shutdown
+exit
+
+interface range GigabitEthernet0/1-2
+description Unused ports
+switchport mode access
+switchport access vlan 666
+shutdown
+exit
+
+interface GigabitEthernet0/1
+no shutdown
+
+interface range FastEthernet0/20-21
+switchport mode access
+switchport access vlan 20
+switchport port-security
+switchport port-security maximum 3
+switchport port-security violation shutdown
+switchport port-security mac-address sticky
+no shutdown
+exit
+
+interface range FastEthernet0/24
+switchport mode access
+switchport access vlan 30
+switchport port-security
+switchport port-security maximum 3
+switchport port-security violation shutdown
+switchport port-security mac-address sticky
+no shutdown
+exit
+
+
+interface range FastEthernet0/20-21
+spanning-tree portfast
+bpduguard enable
+exit
+
+interface range FastEthernet0/24
+spanning-tree portfast
+bpduguard enable
+exit
+
+interface range FastEthernet0/1-2
+channel-group 1 mode active
+exit
+
+interface Port-channel 1
+switchport mode trunk
+exit
+
+interface g0/1
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,99
+exit
+
+interface range f0/1-2
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,99
+exit
+
+end
+write

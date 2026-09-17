@@ -1,0 +1,70 @@
+enable
+configure terminal
+!
+hostname R1
+no ip domain-lookup
+ip domain-name OYL.com
+!
+enable secret 1337
+username admin secret 1337
+service password-encryption
+!
+banner motd #
+*************************************
+* Unauthorized access is prohibited *
+* This is a private network device  *
+*************************************
+#
+!
+line console 0
+ login local
+ logging synchronous
+exit
+!
+line vty 0 15
+ transport input ssh
+ login local
+exit
+!
+interface GigabitEthernet0/1
+ description Link til ISP - OUTSIDE
+ ip address 200.200.100.2 255.255.255.252
+ ip nat outside
+ no shutdown
+exit
+!
+interface GigabitEthernet0/2
+ description Link til S5 - INSIDE
+ ip address 10.10.10.1 255.255.255.248
+ ip nat inside
+ no shutdown
+exit
+!
+interface GigabitEthernet0/0
+ description Link til R3 - INSIDE
+ ip address 10.10.10.9 255.255.255.252
+ ip nat inside
+ no shutdown
+exit
+!
+ip access-list standard NAT-INSIDE
+ remark Kun VLAN 20 maa NAT'es ud - VLAN 10 er udelukket
+ permit 192.168.20.0 0.0.0.255
+exit
+!
+ip nat inside source list NAT-INSIDE interface GigabitEthernet0/1 overload
+!
+ip route 0.0.0.0 0.0.0.0 200.200.100.1
+!
+router ospf 1
+ router-id 1.1.1.1
+ network 10.10.10.0 0.0.0.7 area 0
+ network 10.10.10.8 0.0.0.3 area 0
+ default-information originate
+exit
+!
+ntp server 200.200.100.1
+ntp master 4
+!
+end
+write memory

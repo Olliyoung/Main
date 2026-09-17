@@ -38,25 +38,6 @@
       }
     },
     {
-      "path": "H1/Notes/RAID/SoftRAID.xlsx",
-      "mtime": 1785827986539,
-      "format": "xlsx",
-      "lastAccessed": 146,
-      "position": {
-        "scrollLeft": 0,
-        "scrollTop": 0,
-        "page": 1
-      },
-      "zoom": {
-        "scale": 1,
-        "fit": true
-      },
-      "navigation": {
-        "panelVisible": false,
-        "collapsedIds": []
-      }
-    },
-    {
       "path": "Network 1/Netacad/Packet Tracer/Vlan & Inter-VLAN Routing/Opgaven/Byg selv_VLANs_april25.docx",
       "mtime": 1786699498264,
       "format": "docx",
@@ -72,6 +53,125 @@
       "navigation": {
         "panelVisible": true,
         "collapsedIds": []
+      }
+    },
+    {
+      "path": "H1/Notes/RAID/SoftRAID.xlsx",
+      "mtime": 1785827986539,
+      "format": "xlsx",
+      "lastAccessed": 261,
+      "position": {
+        "scrollLeft": 0,
+        "scrollTop": 0,
+        "page": 1
+      },
+      "zoom": {
+        "scale": 1,
+        "fit": true
+      },
+      "navigation": {
+        "panelVisible": false,
+        "collapsedIds": []
+      }
+    },
+    {
+      "path": "Network 2/PDF & PPTX/Præsentationer-20260914/Modul_9_QoS.pptx",
+      "mtime": 1789016210000,
+      "format": "pptx",
+      "lastAccessed": 262,
+      "position": {
+        "scrollLeft": 0,
+        "scrollTop": 0,
+        "page": 2
+      },
+      "zoom": {
+        "scale": 1,
+        "fit": true
+      },
+      "navigation": {
+        "panelVisible": true,
+        "collapsedIds": [],
+        "notesVisible": false
+      }
+    },
+    {
+      "path": "Network 2/PDF & PPTX/Præsentationer-20260914/Module_7_WAN.pptx",
+      "mtime": 1788900376000,
+      "format": "pptx",
+      "lastAccessed": 263,
+      "position": {
+        "scrollLeft": 0,
+        "scrollTop": 0,
+        "page": 1
+      },
+      "zoom": {
+        "scale": 1,
+        "fit": true
+      },
+      "navigation": {
+        "panelVisible": true,
+        "collapsedIds": [],
+        "notesVisible": false
+      }
+    },
+    {
+      "path": "Network 2/PDF & PPTX/Præsentationer-20260914/Module_10_NTP.pptx",
+      "mtime": 1789029152000,
+      "format": "pptx",
+      "lastAccessed": 264,
+      "position": {
+        "scrollLeft": 0,
+        "scrollTop": 0,
+        "page": 1
+      },
+      "zoom": {
+        "scale": 1,
+        "fit": true
+      },
+      "navigation": {
+        "panelVisible": true,
+        "collapsedIds": [],
+        "notesVisible": false
+      }
+    },
+    {
+      "path": "Network 2/PDF & PPTX/Præsentationer-20260914/Modul8_VPN.pptx",
+      "mtime": 1789016210000,
+      "format": "pptx",
+      "lastAccessed": 294,
+      "position": {
+        "scrollLeft": 0,
+        "scrollTop": 0,
+        "page": 2
+      },
+      "zoom": {
+        "scale": 1,
+        "fit": true
+      },
+      "navigation": {
+        "panelVisible": true,
+        "collapsedIds": [],
+        "notesVisible": false
+      }
+    },
+    {
+      "path": "Network 2/PDF & PPTX/Præsentationer-20260914/Modul12_TSHOOT.pptx",
+      "mtime": 1789367628000,
+      "format": "pptx",
+      "lastAccessed": 296,
+      "position": {
+        "scrollLeft": 0,
+        "scrollTop": 0,
+        "page": 7
+      },
+      "zoom": {
+        "scale": 1.05,
+        "fit": false
+      },
+      "navigation": {
+        "panelVisible": true,
+        "collapsedIds": [],
+        "notesVisible": false
       }
     }
   ]

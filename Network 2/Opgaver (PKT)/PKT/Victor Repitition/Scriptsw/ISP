@@ -1,0 +1,16 @@
+enable
+configure terminal
+!
+hostname ISP
+no ip domain-lookup
+!
+interface GigabitEthernet0/1
+ description Link til R1
+ ip address 200.200.100.1 255.255.255.252
+ no shutdown
+exit
+!
+ntp master 3
+!
+end
+write memory

@@ -1,0 +1,36 @@
+basic configure
+
+configure terminal
+
+hostname Server-PT
+enable secret class
+service Password-Encryption
+
+no ip domain-lookup
+
+ip domain-name srwe.local
+
+username admin privilege 15 secret admin123!
+service Password-Encryption
+
+
+line console 0
+password cisco
+login local
+exit
+
+line vty 0 15
+transport input ssh
+
+login local
+exit
+
+banner motd #
+*************************************
+* Unauthorized access is prohibited *
+* This is a private network device  *
+*************************************
+#
+
+crypto key generate rsa
+ip ssh version 2

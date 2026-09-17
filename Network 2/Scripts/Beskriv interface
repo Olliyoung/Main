@@ -1,0 +1,143 @@
+Beskriv interface
+
+
+conf t
+
+
+
+interface g0/0
+description R2 Connected to R1
+ip add 10.0.12.2 255.255.255.252
+no shut
+ex
+do wr
+
+---
+
+interface g0/0
+description R1 connected to R2
+ip add 10.0.12.1 255.255.255.252
+no shut
+ex
+do wr
+
+interface g0/2
+description R1 connected to R3
+ip add 10.0.13.1 255.255.255.252
+no shut
+ex
+do wr
+
+
+interface g0/1
+description R1 connected to SW1
+no shut
+ex
+do wr
+
+---
+
+interface g0/2
+description R3 connected to R1
+no ip add 10.0.13.2 255.255.255.252
+no shut
+ex
+do wr
+
+interface g0/1
+description R3 connected to SW4
+no shut
+ex
+do wr
+
+---
+
+interface g0/1
+description SW4 connected to R3
+no shut
+ex
+do wr
+
+interface fa0/1
+description SW4 connected to Server-PT
+no shut
+ex
+do wr
+
+---
+
+interface g0/1
+description SW1 connected to R1
+no shut
+ex
+do wr
+
+interface range fa0/21-22
+description SW1 connected to SW3
+no shut
+ex
+do wr
+
+interface range fa0/23-24
+description SW1 connected to SW2
+no shut
+ex
+do wr
+
+---
+
+interface range fa0/23-24
+description SW2 connected to SW1
+no shut
+ex
+do wr
+
+interface fa0/1
+description SW2 connected to PC-A
+no shut
+ex
+do wr
+
+interface fa0/3
+description SW2 connected to PC-B
+no shut
+ex
+do wr
+
+interface fa0/5
+description SW2 connected to PC-C
+no shut
+ex
+do wr
+
+---
+
+interface range fa0/21-22
+description SW3 connected to SW1
+no shut
+ex
+do wr
+
+interface fa0/20
+description SW3 connected to SW2
+no shut
+ex
+do wr
+
+interface fa0/1
+description SW3 connected to PC-D
+no shut
+ex
+do wr
+
+interface fa0/3
+description SW3 connected to PC-E
+no shut
+ex
+do wr
+
+interface fa0/5
+description SW3 connected to PC-F
+no shut
+ex
+do wr

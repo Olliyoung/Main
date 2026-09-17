@@ -1,0 +1,197 @@
+vlan 10
+name SALES
+vlan 20
+name ENGINEERING
+vlan 30
+name GUEST
+vlan 99
+name MANAGEMENT
+vlan 999
+name NATIVE-PARKING
+exit
+
+interface vlan 10
+description SALES
+no shutdown
+exit
+
+interface vlan 20
+description ENGINEERING
+no shutdown
+exit
+
+interface vlan 30
+description GUEST
+
+no shutdown
+exit
+
+interface vlan 99
+ip address 192.168.99.13 255.255.255.0
+description MANAGEMENT
+no shutdown
+ip default-gateway 192.168.99.1
+exit
+
+interface vlan 999
+description NATIVE-PARKING
+no shutdown
+exit
+
+do wr
+
+---
+
+interface FastEthernet0/1
+description SALES
+switchport mode access
+switchport access vlan 10
+spanning-tree portfast
+spanning-tree bpduguard enable
+no shutdown
+exit
+
+interface FastEthernet0/3
+description ENGINEERING
+switchport mode access
+switchport access vlan 20
+spanning-tree portfast
+spanning-tree bpduguard enable
+no shutdown
+exit
+
+interface FastEthernet0/5
+description GUEST
+switchport mode access
+switchport access vlan 30
+spanning-tree portfast
+spanning-tree bpduguard enable
+no shutdown
+exit
+
+do wr
+
+---
+
+interface FastEthernet0/2
+description Unused ports
+switchport mode access
+switchport access vlan 999
+shutdown
+exit
+
+interface FastEthernet0/4
+description Unused ports
+switchport mode access
+switchport access vlan 999
+shutdown
+exit
+
+interface range FastEthernet0/6-19
+description Unused ports
+switchport mode access
+switchport access vlan 999
+shutdown
+exit
+
+interface range FastEthernet0/21-22
+description Unused ports
+switchport mode access
+switchport access vlan 999
+shutdown
+exit
+
+---
+
+interface FastEthernet0/2
+description Unused ports
+switchport mode access
+switchport access vlan 999
+shutdown
+exit
+
+interface FastEthernet0/4
+description Unused ports
+switchport mode access
+switchport access vlan 999
+shutdown
+exit
+
+interface range FastEthernet0/6-19
+description Unused ports
+switchport mode access
+switchport access vlan 999
+shutdown
+exit
+
+interface range FastEthernet0/23-24
+description Unused ports
+switchport mode access
+switchport access vlan 999
+shutdown
+exit
+
+---
+
+interface g0/1
+switchport mode trunk
+switchport nonegotiate
+switchport trunk allowed vlan 10,20,30,99
+exit
+
+interface fa0/20
+duplex full
+speed 100
+switchport mode trunk
+switchport nonegotiate
+switchport trunk allowed vlan 10,20,30,99
+exit
+
+--
+
+interface range fa0/23-24
+duplex full
+speed 100
+channel-group 1 mode active
+interface Port-channel 1
+switchport mode trunk
+switchport trunk native vlan 999
+switchport trunk allowed vlan 10,20,30,99,999
+switchport nonegotiate
+no shutdown
+exit
+do wr
+
+interface range fa0/21-22
+duplex full
+speed 100
+channel-group 2 mode desirable
+interface Port-channel 2
+switchport mode trunk
+switchport trunk native vlan 999
+switchport trunk allowed vlan 10,20,30,99,999
+switchport nonegotiate
+no shutdown
+exit
+do wr
+
+# S2
+configure terminal
+spanning-tree mode rapid-pvst
+spanning-tree vlan 20 priority 24576
+spanning-tree vlan 99 priority 24576
+spanning-tree vlan 10 priority 28672
+spanning-tree vlan 30 priority 28672
+end
+write memory
+
+
+# S1
+configure terminal
+spanning-tree mode rapid-pvst
+spanning-tree vlan 10 priority 24576
+spanning-tree vlan 30 priority 24576
+spanning-tree vlan 20 priority 28672
+spanning-tree vlan 99 priority 28672
+end
+write memory

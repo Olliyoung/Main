@@ -1,0 +1,84 @@
+enable
+configure terminal
+!
+hostname S5
+no ip domain-lookup
+ip domain-name OYL.com
+!
+enable secret 1337
+username admin secret 1337
+service password-encryption
+!
+banner motd #
+*************************************
+* Unauthorized access is prohibited *
+* This is a private network device  *
+*************************************
+#
+!
+line console 0
+ login local
+ logging synchronous
+exit
+!
+line vty 0 15
+ transport input ssh
+ login local
+exit
+!
+vlan 67
+ name vlan-67-dhcp
+exit
+vlan 99
+ name vlan-99-native-blackhole
+exit
+!
+spanning-tree mode rapid-pvst
+!
+interface FastEthernet0/2
+ description DHCP Server
+ switchport mode access
+ switchport access vlan 67
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+exit
+!
+interface FastEthernet0/1
+ description Link til R3
+ switchport mode access
+ switchport access vlan 67
+ no shutdown
+exit
+!
+interface GigabitEthernet0/2
+ description Link til NAT-router
+ switchport mode access
+ switchport access vlan 67
+ no shutdown
+exit
+!
+interface GigabitEthernet0/1
+ description Link til R2
+ switchport mode access
+ switchport access vlan 67
+ no shutdown
+exit
+!
+interface range FastEthernet0/3-24
+ description Unused
+ switchport mode access
+ switchport access vlan 99
+ shutdown
+exit
+!
+interface Vlan67
+ description Management
+ ip address 10.10.10.5 255.255.255.248
+ no shutdown
+exit
+!
+ip default-gateway 10.10.10.1
+!
+end
+write memory

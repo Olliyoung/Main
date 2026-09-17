@@ -1,0 +1,87 @@
+enable
+configure terminal
+!
+hostname R3
+no ip domain-lookup
+ip domain-name OYL.com
+!
+enable secret 1337
+username admin secret 1337
+service password-encryption
+!
+banner motd #
+*************************************
+* Unauthorized access is prohibited *
+* This is a private network device  *
+*************************************
+#
+!
+line console 0
+ login local
+ logging synchronous
+exit
+!
+line vty 0 15
+ transport input ssh
+ login local
+exit
+!
+interface GigabitEthernet0/0
+ ip address 10.10.10.10 255.255.255.252
+ no shutdown
+exit
+!
+interface GigabitEthernet0/2
+ ip address 10.10.10.3 255.255.255.248
+ no shutdown
+exit
+!
+interface GigabitEthernet0/1.10
+ description VLAN-10
+ encapsulation dot1Q 10
+ ip address 192.168.10.3 255.255.255.0
+ ip helper-address 10.10.10.4
+ standby 10 ip 192.168.10.1
+ standby 10 priority 110
+ standby 10 preempt
+ no shutdown
+exit
+!
+interface GigabitEthernet0/1.20
+ description VLAN-20
+ encapsulation dot1Q 20
+ ip address 192.168.20.3 255.255.255.0
+ ip helper-address 10.10.10.4
+ standby 20 ip 192.168.20.1
+ standby 20 priority 110
+ standby 20 preempt
+ no shutdown
+exit
+!
+interface GigabitEthernet0/1.77
+ description VLAN-77
+ encapsulation dot1Q 77
+ ip address 192.168.77.3 255.255.255.0
+ ip helper-address 10.10.10.4
+ standby 77 ip 192.168.77.1
+ standby 77 priority 110
+ standby 77 preempt
+ no shutdown
+exit
+!
+router ospf 1
+ router-id 3.3.3.3
+ passive-interface GigabitEthernet0/1.10
+ passive-interface GigabitEthernet0/1.20
+ passive-interface GigabitEthernet0/1.77
+ network 192.168.10.0 0.0.0.255 area 0
+ network 192.168.20.0 0.0.0.255 area 0
+ network 192.168.77.0 0.0.0.255 area 0
+ network 10.10.10.0 0.0.0.7 area 0
+ network 10.10.10.8 0.0.0.3 area 0
+exit
+!
+ntp server 10.10.10.1
+!
+end
+wr

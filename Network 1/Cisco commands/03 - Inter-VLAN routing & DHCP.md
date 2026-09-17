@@ -2,7 +2,7 @@
 tags: [network-1, cisco, packet-tracer, inter-vlan, router-on-a-stick, dhcp, svi, ccna, srwe]
 aliases: ["Router on a stick", "Inter-VLAN routing", "DHCP config", "IP helper"]
 ---
-
+ +
 # 03 — Inter-VLAN routing & DHCP
 
 > [!abstract] What & why

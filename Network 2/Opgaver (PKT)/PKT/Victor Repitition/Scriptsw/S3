@@ -1,0 +1,157 @@
+enable
+configure terminal
+!
+hostname S3
+no ip domain-lookup
+ip domain-name OYL.com
+!
+enable secret 1337
+username admin secret 1337
+service password-encryption
+!
+banner motd #
+*************************************
+* Unauthorized access is prohibited *
+* This is a private network device  *
+*************************************
+#
+!
+line console 0
+ login local
+ logging synchronous
+exit
+!
+line vty 0 15
+ transport input ssh
+ login local
+exit
+!
+vlan 10
+ name vlan-10
+exit
+vlan 20
+ name vlan-20
+exit
+vlan 77
+ name vlan-77-management
+exit
+vlan 99
+ name vlan-99-native-blackhole
+exit
+!
+interface Vlan77
+ description Management
+ ip address 192.168.77.77 255.255.255.0
+ no shutdown
+exit
+!
+ip default-gateway 192.168.77.1
+!
+spanning-tree mode rapid-pvst
+!
+interface FastEthernet0/1
+ description PC5 Management VLAN 77
+ switchport mode access
+ switchport access vlan 77
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ switchport port-security
+ switchport port-security maximum 5
+ switchport port-security violation shutdown
+ switchport port-security mac-address sticky
+ no shutdown
+exit
+!
+interface FastEthernet0/3
+ description PC VLAN 10
+ switchport mode access
+ switchport access vlan 10
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ switchport port-security
+ switchport port-security maximum 5
+ switchport port-security violation shutdown
+ switchport port-security mac-address sticky
+ no shutdown
+exit
+!
+interface FastEthernet0/4
+ description PC VLAN 20
+ switchport mode access
+ switchport access vlan 20
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ switchport port-security
+ switchport port-security maximum 5
+ switchport port-security violation shutdown
+ switchport port-security mac-address sticky
+ no shutdown
+exit
+!
+interface FastEthernet0/2
+ description Unused
+ switchport mode access
+ switchport access vlan 99
+ shutdown
+exit
+!
+interface range FastEthernet0/5-16
+ description Unused
+ switchport mode access
+ switchport access vlan 99
+ shutdown
+exit
+!
+interface range FastEthernet0/19-20
+ description Unused
+ switchport mode access
+ switchport access vlan 99
+ shutdown
+exit
+!
+interface range GigabitEthernet0/1-2
+ description Unused
+ switchport mode access
+ switchport access vlan 99
+ shutdown
+exit
+!
+interface range FastEthernet0/23-24
+ shutdown
+ description Po3 til S2 - LACP
+ switchport mode trunk
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,77,99
+ duplex full
+ speed 100
+ channel-group 3 mode active
+ no shutdown
+exit
+!
+interface range FastEthernet0/21-22
+ shutdown
+ description Po4 til S4 - LACP
+ switchport mode trunk
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,77,99
+ duplex full
+ speed 100
+ channel-group 4 mode active
+ no shutdown
+exit
+!
+interface range FastEthernet0/17-18
+ shutdown
+ description Po5 til S1 - LACP
+ switchport mode trunk
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,77,99
+ duplex full
+ speed 100
+ channel-group 5 mode active
+ no shutdown
+exit
+!
+
+end
+write memory
